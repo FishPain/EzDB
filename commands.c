@@ -3,11 +3,12 @@
 #include <string.h>
 #include "commands.h"
 
-int open(struct kvPair *table)
+int open(struct kvPair *table, char key[])
 {
     FILE *phonebookPtr;
-
-    phonebookPtr = fopen("data/PhoneBook.txt", "r");
+    char filePath[MAX_CHAR_LEN];
+    snprintf(filePath, sizeof(filePath), "data/%s", key);
+    phonebookPtr = fopen(filePath, "r");
     if (phonebookPtr == NULL)
     {
         perror("Error opening file");
@@ -25,11 +26,12 @@ int open(struct kvPair *table)
     return 0;
 }
 
-int save(struct kvPair *table)
+int save(struct kvPair *table, char key[])
 {
     FILE *phonebookPtr;
-    phonebookPtr = fopen("data/PhoneBook.txt", "w");
-
+    char filePath[MAX_CHAR_LEN];
+    snprintf(filePath, sizeof(filePath), "data/%s", key);
+    phonebookPtr = fopen(filePath, "r");
     if (phonebookPtr == NULL)
     {
         perror("Error opening file");
@@ -38,11 +40,9 @@ int save(struct kvPair *table)
 
     for (int i = 0; i < sizeof(table); i++)
     {
-        char c[100];
-        strcpy(c, table[i].key); // Copy str_1 to a
-        strcat(c, " ");  // Append a space
-        strcat(c, table[i].value); // Append str_2
-        strcat(c, "\n"); // Append str_2
+        char c[MAX_CHAR_LEN];
+        snprintf(c, sizeof(c), "%s %s\n", table[i].key, table[i].value);
+        c[sizeof(c) - 1] = '\0';
         fputs(c, phonebookPtr);
         printf("Key: %s, Value: %s\n", table[i].key, table[i].value);
 

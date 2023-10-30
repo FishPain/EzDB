@@ -2,8 +2,6 @@
 #include <ctype.h>
 #include <string.h>
 #include "commands.h"
-#define OPEN "open"
-#define SAVE "save"
 
 char *lower(char *str)
 {
@@ -17,38 +15,73 @@ char *lower(char *str)
 
 int main()
 {
-    char choice[MAX_CHAR_LEN];
     struct kvPair table[MAX_LEN];
+    char choice[MAX_CHAR_LEN];
     char operation[MAX_CHAR_LEN], key[MAX_CHAR_LEN], value[MAX_CHAR_LEN];
+
     while (1)
     {
         printf("Enter Your Choice:\n");
         fgets(choice, MAX_CHAR_LEN, stdin);
-        sscanf(choice, "%s %s %s", operation, key, value);
+        int argCount = sscanf(choice, "%s %s %s", operation, key, value);
         char *loweredOperation = lower(operation);
+
         if (strcmp(loweredOperation, OPEN) == 0)
         {
-            int result = open(table);
+            /* OPEN Command
+                Takes in OPEN <FILE_NAME> and saves data from file into memory.
+                Defined by struct kvPair table[MAX_LEN]
+
+                struct kvPair {
+                    char key[MAX_CHAR_LEN];
+                    char value[MAX_CHAR_LEN];
+                };
+
+            */
+            if (argCount != 2)
+            {
+                printf("Missing Filename. Expecting: OPEN <FILE_NAME>\n");
+                continue;
+            }
+            int result = open(table, key);
             if (result != 0)
             {
                 printf("Failed to open the file. %d\n", result);
-                return 1;
+                continue;
             }
         }
         else if (strcmp(loweredOperation, SAVE) == 0)
         {
-            int result = save(table);
+            /* SAVE Command
+                Takes in SAVE <FILE_NAME> and writes data into file from memory.
+                Defined by struct kvPair table[MAX_LEN]
+
+                struct kvPair {
+                    char key[MAX_CHAR_LEN];
+                    char value[MAX_CHAR_LEN];
+                };
+            */
+            if (argCount != 2)
+            {
+                printf("Missing Filename. Expecting: SAVE <FILE_NAME>\n");
+                continue;
+            }
+            int result = save(table, key);
             if (result != 0)
             {
                 printf("Failed to save the file. %d\n", result);
-                return 1;
+                continue;
             }
         }
         // add your commands here...
         // to access data, simply use the table variable.
+        else if (strcmp(loweredOperation, EXIT) == 0)
+        {
+            break;
+        }
         else
         {
-            return 0;
+            continue;
         }
     }
     return 0;
