@@ -1,10 +1,13 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H
-#define MAX_LEN 128
-#define MAX_CHAR_LEN 512
+#define MAX_LEN 64
+#define MAX_CHAR_LEN 256
 #define OPEN "open"
 #define SAVE "save"
 #define EXIT "exit"
+#define FILE_HEADER_KEY "Key"
+#define FILE_HEADER_VALUE "Value"
+
 
 struct kvPair {
     char key[MAX_CHAR_LEN];

@@ -14,12 +14,18 @@ int open(struct kvPair *table, char key[])
         perror("Error opening file");
         return 1;
     }
-
+    // set c = 1 to ignore header row.
     int c = 0;
-    while (fscanf(phonebookPtr, "%s %s", table[c].key, table[c].value) == 2)
+    char text[MAX_CHAR_LEN];
+    while (fgets(text, MAX_CHAR_LEN, phonebookPtr)!= NULL)
     {
-        printf("Key: %s, Value: %s\n", table[c].key, table[c].value);
-        c++;
+        text[strcspn(text, "\n")] = '\0';
+
+        if (strcmp(text, "Key Value")!=0 && sscanf(text, "%s %s", table[c].key, table[c].value) == 2)
+        {
+            printf("%s\n", text);
+            c++;
+        }
     }
 
     fclose(phonebookPtr);
@@ -37,15 +43,14 @@ int save(struct kvPair *table, char key[])
         perror("Error opening file");
         return 1;
     }
-
-    for (int i = 0; i < sizeof(table); i++)
+    
+    for (int i = 0; i < sizeof(table); ++i)
     {
         char c[MAX_CHAR_LEN];
         snprintf(c, sizeof(c), "%s %s\n", table[i].key, table[i].value);
         c[sizeof(c) - 1] = '\0';
         fputs(c, phonebookPtr);
-        printf("Key: %s, Value: %s\n", table[i].key, table[i].value);
-
+        printf("%s\n", c);
     }
     fclose(phonebookPtr);
     return 0;
