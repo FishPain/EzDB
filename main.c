@@ -77,6 +77,22 @@ int main()
                 continue;
             }
         }
+        else if (strcmp(loweredOperation, UPDATE) == 0)
+        {
+            if (argCount != 3)
+            {
+                printf("Invalid number of arguments for UPDATE. Expecting: UPDATE <KEY> <NEW_VALUE>\n");
+                continue;
+            }
+
+            int result = update(table, MAX_LEN, key, value);
+
+            if (result != 0)
+            {
+                printf("Failed to update the key. %d\n", result);
+                continue;
+            }
+        }
         // add your commands here...
         // to access data, simply use the table variable.
         else if (strcmp(loweredOperation, EXIT) == 0)
