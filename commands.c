@@ -82,9 +82,30 @@ int query(void)
     return 0;
 }
 
-int update(void)
+int update(struct kvPair *table, int size, char key[], char newValue[])
 {
-    return 0;
+     FILE *phonebookPtr; 
+    char filePath[MAX_CHAR_LEN];
+    snprintf(filePath, sizeof(filePath), "data/%s", key);
+
+    phonebookPtr = fopen(filePath, "a"); 
+
+    if (phonebookPtr == NULL)
+    {
+        perror("Error opening file");
+        return 1;
+    }
+
+    for (int i = 0; i < size; i++) // Update the specific key-value pair in the file
+    {
+        if (strcmp(table[i].key, key) == 0)
+        {
+            fprintf(phonebookPtr, "%s %s\n", table[i].key, newValue);
+        }
+    }
+
+    fclose(phonebookPtr); 
+    return 0; 
 }
 
 int del(void)
