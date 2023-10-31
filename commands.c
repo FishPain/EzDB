@@ -10,6 +10,8 @@ void insert(void)
 
 int query(void)
 {
+    //hi
+    // bye
     return 0;
 }
 
