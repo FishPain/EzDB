@@ -4,9 +4,9 @@
 #define MAX_CHAR_LEN 256
 #define OPEN "open"
 #define SAVE "save"
+#define SHOW_ALL "show_all"
 #define EXIT "exit"
-#define FILE_HEADER_KEY "Key"
-#define FILE_HEADER_VALUE "Value"
+#define FILE_HEADER "Key Value"
 
 
 struct kvPair {

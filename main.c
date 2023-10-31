@@ -3,15 +3,19 @@
 #include <string.h>
 #include "commands.h"
 
-char *lower(char *str)
+char *lower(char *str) // to lower a string.
 {
     for (int i = 0; i < strlen(str); i++)
     {
-        str[i] = tolower(str[i]);
-    }
+        if (str[i]!= '_')
+        {
+            str[i] = tolower(str[i]);
 
+        }
+    }
     return str;
 }
+
 
 int main()
 {
@@ -22,10 +26,10 @@ int main()
     while (1)
     {
         printf("Enter Your Choice:\n");
-        fgets(choice, MAX_CHAR_LEN, stdin);
-        int argCount = sscanf(choice, "%s %s %s", operation, key, value);
-        char *loweredOperation = lower(operation);
-
+        fgets(choice, MAX_CHAR_LEN, stdin); // get the user input
+        int argCount = sscanf(choice, "%s %s %s", operation, key, value); // split user input into 3 variables
+        // Eg. Req: operation, key, value but only input operation, key -> argCount = 2;
+        char *loweredOperation = lower(operation); // to lower the operation command
         if (strcmp(loweredOperation, OPEN) == 0)
         {
             /* OPEN Command
@@ -38,12 +42,12 @@ int main()
                 };
 
             */
-            if (argCount != 2)
+            if (argCount != 2) // check if all required commands are present.
             {
                 printf("Missing Filename. Expecting: OPEN <FILE_NAME>\n");
                 continue;
             }
-            int result = open(table, key);
+            int result = open(table, key); // calling the funtion
             if (result != 0)
             {
                 printf("Failed to open the file. %d\n", result);

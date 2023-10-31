@@ -6,10 +6,10 @@ EXEC = ezdb
 all: $(EXEC)
 
 $(EXEC): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(EXEC)
+	$(CC) $(OBJS) -o $(EXEC)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $<
+	$(CC) -c $<
 
 clean:
 	rm -f $(OBJS) $(EXEC)
