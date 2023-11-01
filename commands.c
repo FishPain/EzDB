@@ -92,7 +92,19 @@ int del(void)
     return 0;
 }
 
-int showAll(void)
+int showAll(struct kvPair *data)
 {
-    return 0;
+    printf("There are in total %i records found:\n", tablesize);  
+    for (int i = 0; i < tablesize; i++) 
+    {
+        if (data[i].value == 0) 
+        {
+            printf("\n");
+        }
+        else 
+        {
+            printf("%s %s\n", data[i].key, data[i].value);
+        }
+    }
+
 }

@@ -20,6 +20,6 @@ int insert(void);
 int query(void);
 int update(void);
 int del(void);
-int showAll(void);
+int showAll(struct kvPair *datastruct kvPair *data);
 
 #endif
