@@ -41,7 +41,7 @@ int save(struct kvPair *table, char key[])
     char filePath[MAX_CHAR_LEN];
     char c[MAX_CHAR_LEN]; // define temp string to contain the concat Key Value Pair
 
-    snprintf(filePath, sizeof(filePath), "data/%s", key);
+    snprintf(c, sizeof(c), "%s %s\n", table[0].key, table[0].value); // concatation.
     if (strlen(c) <= 2)
     {
         fclose(phonebookPtr); // close file
@@ -49,6 +49,7 @@ int save(struct kvPair *table, char key[])
         return 1;
     }
     
+    snprintf(filePath, sizeof(filePath), "data/%s", key);
     phonebookPtr = fopen(filePath, "w");
     if (phonebookPtr == NULL)
     {
