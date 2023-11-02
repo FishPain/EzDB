@@ -3,34 +3,22 @@
 #include <string.h>
 #include "commands.h"
 
-char *lower(char *str) // to lower a string.
-{
-    for (int i = 0; i < strlen(str); i++)
-    {
-        if (str[i]!= '_')
-        {
-            str[i] = tolower(str[i]);
-
-        }
-    }
-    return str;
-}
-
-
 int main()
 {
     struct kvPair table[MAX_LEN];
     char choice[MAX_CHAR_LEN];
     char operation[MAX_CHAR_LEN], key[MAX_CHAR_LEN], value[MAX_CHAR_LEN];
+    int numRecords = 0;
 
     while (1)
     {
         printf("Enter Your Choice:\n");
-        fgets(choice, MAX_CHAR_LEN, stdin); // get the user input
+        fgets(choice, MAX_CHAR_LEN, stdin);                               // get the user input
         int argCount = sscanf(choice, "%s %s %s", operation, key, value); // split user input into 3 variables
         // Eg. Req: operation, key, value but only input operation, key -> argCount = 2;
-        char *loweredOperation = lower(operation); // to lower the operation command
-        if (strcmp(loweredOperation, OPEN) == 0)
+        lower(operation); // to lower the operation command
+
+        if (strcmp(operation, OPEN) == 0)
         {
             /* OPEN Command
                 Takes in OPEN <FILE_NAME> and saves data from file into memory.
@@ -47,14 +35,15 @@ int main()
                 printf("Missing Filename. Expecting: OPEN <FILE_NAME>\n");
                 continue;
             }
-            int result = open(table, key); // calling the funtion
-            if (result != 0)
+            numRecords = open(table, key); // calling the function and storing the number of records
+            if (numRecords == -1)
             {
-                printf("Failed to open the file. %d\n", result);
+                printf("Failed to open the file. %d\n", numRecords);
                 continue;
             }
         }
-        else if (strcmp(loweredOperation, SAVE) == 0)
+
+        else if (strcmp(operation, SAVE) == 0)
         {
             /* SAVE Command
                 Takes in SAVE <FILE_NAME> and writes data into file from memory.
@@ -77,9 +66,23 @@ int main()
                 continue;
             }
         }
-        // add your commands here...
-        // to access data, simply use the table variable.
-        else if (strcmp(loweredOperation, EXIT) == 0)
+
+        else if (strcmp(operation, QUERY) == 0)
+        {
+            int result = query(table, numRecords, key);
+            if (result == 0)
+            {
+                // Query was successful
+                printf("Query executed successfully.\n");
+            }
+            else
+            {
+                // Query failed
+                printf("Query failed. The key '%s' was not found in the database.\n", key);
+            }
+        }
+
+        else if (strcmp(operation, EXIT) == 0)
         {
             break;
         }
