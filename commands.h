@@ -7,7 +7,7 @@
 #define SHOW_ALL "show_all"
 #define EXIT "exit"
 #define FILE_HEADER "Key Value"
-
+#define QUERY "query"
 
 struct kvPair {
     char key[MAX_CHAR_LEN];
@@ -17,7 +17,7 @@ struct kvPair {
 int open(struct kvPair *table, char key[]);
 int save(struct kvPair *table, char key[]);
 int insert(void);
-int query(void);
+int query(struct kvPair *table, int numRecords, char key[]);
 int update(void);
 int del(void);
 int showAll(void);
