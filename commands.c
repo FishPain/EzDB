@@ -1,7 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "commands.h"
+
+void lower(char *str) // to lower a string.
+{
+    for (int i = 0; str[i]; i++)
+        if (str[i]!= '_')
+            str[i] = tolower((unsigned char)str[i]);
+}
 
 int open(struct kvPair *table, char key[])
 {
@@ -15,18 +23,18 @@ int open(struct kvPair *table, char key[])
     }
     int c = 0; // counter
     char text[MAX_CHAR_LEN];
-    
-    // Read and discard the header line
-    if (fgets(text, MAX_CHAR_LEN, phonebookPtr) == NULL) {
-        fclose(phonebookPtr);
-        return 1; // Error reading the header
-    }
 
-    while (fgets(text, MAX_CHAR_LEN, phonebookPtr) != NULL) {
-        text[strcspn(text, "\n")] = '\0'; // Remove trailing \n and change it to \0 (represents the end of line)
-        if (sscanf(text, "%s %s", table[c].key, table[c].value) == 2) {
-            printf("%s %s\n", table[c].key, table[c].value); // Print out to show
-            c++; // Increment and count the records
+    while (fgets(text, MAX_CHAR_LEN, phonebookPtr) != NULL) // get each row of text file and save to text[]
+    {
+        text[strcspn(text, "\n")] = '\0'; // Remove tailing \n and change it to \0 (represents the end of line)
+        if (strcmp(text, FILE_HEADER) != 0 &&                        // Ignore the column header in txt file
+            sscanf(text, "%s %s", table[c].key, table[c].value) == 2 // Split the string into 2 parts.
+            // sscanf will return num of variables retrieved.
+        )
+        {
+            lower(table[c].key);
+            printf("%s %s\n", table[c].key, table[c].value); // print out to show
+            c++;                  // increment
         }
     }
 

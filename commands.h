@@ -22,4 +22,7 @@ int update(void);
 int del(void);
 int showAll(void);
 
+// Helper functions
+void lower(char *str);
+
 #endif
