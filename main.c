@@ -22,7 +22,8 @@ int main()
     struct kvPair table[MAX_LEN];
     char choice[MAX_CHAR_LEN];
     char operation[MAX_CHAR_LEN], key[MAX_CHAR_LEN], value[MAX_CHAR_LEN];
-
+    int numRecords = 0;
+    
     while (1)
     {
         printf("Enter Your Choice:\n");
@@ -47,8 +48,8 @@ int main()
                 printf("Missing Filename. Expecting: OPEN <FILE_NAME>\n");
                 continue;
             }
-            int result = open(table, key); // calling the funtion
-            if (result != 0)
+            numRecords = open(table, key); // calling the function and storing the number of records
+            if (numRecords == 0)
             {
                 printf("Failed to open the file. %d\n", result);
                 continue;
@@ -77,8 +78,18 @@ int main()
                 continue;
             }
         }
-        // add your commands here...
-        // to access data, simply use the table variable.
+        else if (strcmp(loweredOperation, QUERY) == 0)
+        {
+            int result = query(table, numRecords, key);
+            if (result == 0) {
+                // Query was successful
+                printf("Query executed successfully.\n");
+            } else {
+                // Query failed
+                printf("Query failed. The key '%s' was not found in the database.\n", key);
+            }
+        }
+            
         else if (strcmp(loweredOperation, EXIT) == 0)
         {
             break;
