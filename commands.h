@@ -19,7 +19,7 @@ int open(struct kvPair *table, char key[]);
 int save(struct kvPair *table, char key[]);
 int insert(void);
 int query(struct kvPair *table, int numRecords, char key[]);
-int update(struct kvPair *table, int size,char key[], char newValue[]);
+int update(struct kvPair *table, char key[], char newValue[]);
 int del(void);
 int showAll(void);
 
