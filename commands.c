@@ -123,30 +123,19 @@ int query(struct kvPair *table, int numRecords, char key[])
     return 1; // Record not found
 }
 
-int update(struct kvPair *table, int size, char key[], char newValue[])
+int update(struct kvPair *table, char key[], char newValue[])
 {
-     FILE *phonebookPtr; 
-    char filePath[MAX_CHAR_LEN];
-    snprintf(filePath, sizeof(filePath), "data/%s", key);
-
-    phonebookPtr = fopen(filePath, "a"); 
-
-    if (phonebookPtr == NULL)
+    for (int i = 0; i < MAX_LEN; i++) 
     {
-        perror("Error opening file");
-        return 1;
-    }
-
-    for (int i = 0; i < size; i++) // Update the specific key-value pair in the file
-    {
-        if (strcmp(table[i].key, key) == 0)
+        if (strcmp(table[i].key, key) == 0) 
         {
-            fprintf(phonebookPtr, "%s %s\n", table[i].key, newValue);
+            snprintf(table[i].value, sizeof(table[i].value), "%s", newValue);  // Update the value for the specific key
+            printf("The value for the record of Key=%s is successfully updated.\n", key);
+            return 0;
         }
     }
-
-    fclose(phonebookPtr); 
-    return 0; 
+    printf("Key=%s not found. Failed to update the value.\n", key);
+    return 1;
 }
 
 int del(void)
