@@ -74,8 +74,8 @@ int main()
                 printf("Invalid number of arguments for UPDATE. Expecting: UPDATE <KEY> <NEW_VALUE>\n");
                 continue;
             }
-
-            int result = update(table, MAX_LEN, key, value);
+            
+            int result = update(table, key, value);
 
             if (result != 0)
             {
