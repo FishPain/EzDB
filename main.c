@@ -67,6 +67,23 @@ int main()
             }
         }
 
+        else if (strcmp(operation, UPDATE) == 0)
+        {
+            if (argCount != 3)
+            {
+                printf("Invalid number of arguments for UPDATE. Expecting: UPDATE <KEY> <NEW_VALUE>\n");
+                continue;
+            }
+            
+            int result = update(table, key, value);
+
+            if (result != 0)
+            {
+                printf("Failed to update the key. %d\n", result);
+                continue;
+            }
+        }
+
         else if (strcmp(operation, QUERY) == 0)
         {
             int result = query(table, numRecords, key);
