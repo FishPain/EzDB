@@ -11,6 +11,24 @@ void lower(char *str) // to lower a string.
             str[i] = tolower((unsigned char)str[i]);
 }
 
+/*
+comparison function to sort an array of struct kvPair
+*/ 
+int compare(const void *tmp1, const void *tmp2)
+{
+  struct kvPair *data1 = (struct kvPair *)tmp1;
+  struct kvPair *data2 = (struct kvPair *)tmp2;
+  // check if key (contact name) is same
+  int chCompare = strcmp(data1->key, data2->key);
+  if (chCompare == 0) {
+    // return value (number) in ascending order if key (contact name) is same
+    return data1->value - data2->value;
+  }
+  else {
+    return chCompare;
+  }
+}
+
 int open(struct kvPair *table, char key[])
 {
     FILE *phonebookPtr;
@@ -34,9 +52,14 @@ int open(struct kvPair *table, char key[])
         )
         {
             lower(table[c].key);
-            printf("%s %s\n", table[c].key, table[c].value); // print out to show
+            //printf("%s %s\n", table[c].key, table[c].value); // print out to show
             c++;                                             // increment
         }
+    }
+    // sort using qsort, with comparator function passed in
+    qsort(table, c, sizeof(struct kvPair), compare);
+    for (int i = 0; i < c; i++) {
+        printf("%s\t%s\n", table[i].key, table[i].value);
     }
 
     fclose(phonebookPtr); // close the file

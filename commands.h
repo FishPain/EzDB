@@ -24,5 +24,6 @@ int showAll(void);
 
 // Helper functions
 void lower(char *str);
+int compare(const void *s1, const void *s2);
 
 #endif
