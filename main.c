@@ -82,13 +82,6 @@ int main()
             }
         }
 
-        else if (strcmp(operation, "print") == 0) {
-            qsort(table, numRecords, sizeof(struct kvPair), compare);
-            for (int i = 0; i < numRecords; i++) {
-                printf("%s\t%s\n", table[i].key, table[i].value);
-            }
-        }
-
         else if (strcmp(operation, EXIT) == 0)
         {
             break;
