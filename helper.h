@@ -1,0 +1,16 @@
+#ifndef HELPER_H
+#define HELPER_H
+#define MAX_LEN 64
+#define MAX_CHAR_LEN 256
+#define MAX_TABLE_SIZE 10
+
+typedef struct kvPair {
+    char key[MAX_CHAR_LEN];
+    char value[MAX_CHAR_LEN];
+} kvPair;
+
+// Helper functions
+void lower(char *str);
+int compare(const void *tmp1, const void *tmp2);
+
+#endif

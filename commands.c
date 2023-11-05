@@ -4,33 +4,6 @@
 #include <ctype.h>
 #include "commands.h"
 
-void lower(char *str) // to lower a string.
-{
-    for (int i = 0; str[i]; i++)
-        if (str[i] != '_')
-            str[i] = tolower((unsigned char)str[i]);
-}
-
-/*
-comparison function to sort an array of kvPair
-*/
-int compare(const void *tmp1, const void *tmp2)
-{
-    kvPair *data1 = (kvPair *)tmp1;
-    kvPair *data2 = (kvPair *)tmp2;
-    // check if key (contact name) is same
-    int chCompare = strcmp(data1->key, data2->key);
-    if (chCompare == 0)
-    {
-        // return value (number) in ascending order if key (contact name) is same
-        return data1->value - data2->value;
-    }
-    else
-    {
-        return chCompare;
-    }
-}
-
 int open(kvPair *table, char key[])
 {
     FILE *phonebookPtr;
