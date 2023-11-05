@@ -123,9 +123,19 @@ int query(kvPair *table, int numRecords, char key[])
     return 1; // Record not found
 }
 
-int update(void)
+int update(struct kvPair *table, char key[], char newValue[])
 {
-    return 0;
+    for (int i = 0; i < MAX_LEN; i++) 
+    {
+        if (strcmp(table[i].key, key) == 0) 
+        {
+            snprintf(table[i].value, sizeof(table[i].value), "%s", newValue);  // Update the value for the specific key
+            printf("The value for the record of Key=%s is successfully updated.\n", key);
+            return 0;
+        }
+    }
+    printf("Key=%s not found. Failed to update the value.\n", key);
+    return 1;
 }
 
 int del(void)
