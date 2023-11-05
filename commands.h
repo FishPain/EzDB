@@ -14,11 +14,11 @@ struct kvPair {
     char value[MAX_CHAR_LEN];
 };
 
-int open(struct kvPair *table, char key[]);
-int save(struct kvPair *table, char key[]);
-int insert(void);
-int query(void);
-int update(void);
+int open(kvPair *table, char key[]);
+int save(kvPair *table, char key[]);
+int insert(kvPair *table, char key[], char value[]);
+int query(kvPair *table, int numRecords, char key[]);
+int update(struct kvPair *table, char key[], char newValue[]);
 int del(void);
 int showAll(void);
 

@@ -72,8 +72,22 @@ int save(struct kvPair *table, char key[])
     return 0;
 }
 
-int insert(void)
+int insert(kvPair *table, char key[], char value[])
 {
+    // check if key already exists?
+    for (int i = 0; i < MAX_LEN; i++)
+    {
+        if (strcmp(table[i].key, key) == 0)
+        {
+            printf("Key: %s already exists. Failed to insert the record.\n", key);
+            return 1;
+        }
+    }
+
+    // Write the key value pair to the file
+    fprintf(table, "%s %s\n", key, value);
+    printf("A record of Key: %s, Value: %s is inserted into the database.\n", key, value);
+
     return 0;
 }
 
