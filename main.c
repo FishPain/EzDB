@@ -5,7 +5,7 @@
 
 int main()
 {
-    struct kvPair table[MAX_LEN];
+    kvPair table[MAX_LEN];
     char choice[MAX_CHAR_LEN];
     char operation[MAX_CHAR_LEN], key[MAX_CHAR_LEN], value[MAX_CHAR_LEN];
     int numRecords = 0;

@@ -11,7 +11,7 @@ void lower(char *str) // to lower a string.
             str[i] = tolower((unsigned char)str[i]);
 }
 
-int open(struct kvPair *table, char key[])
+int open(kvPair *table, char key[])
 {
     FILE *phonebookPtr;
     char filePath[MAX_CHAR_LEN];
@@ -43,7 +43,7 @@ int open(struct kvPair *table, char key[])
     return c;             // Return the number of records loaded
 }
 
-int save(struct kvPair *table, char key[])
+int save(kvPair *table, char key[])
 {
     FILE *phonebookPtr;
     char filePath[MAX_CHAR_LEN];
@@ -85,7 +85,7 @@ int insert(void)
     return 0;
 }
 
-int query(struct kvPair *table, int numRecords, char key[])
+int query(kvPair *table, int numRecords, char key[])
 {
     // Convert the input key to lowercase for case-insensitive comparison
     char lowerKey[MAX_CHAR_LEN];
