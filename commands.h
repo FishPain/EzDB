@@ -19,11 +19,12 @@ int open(kvPair *table, char key[]);
 int save(kvPair *table, char key[]);
 int insert(void);
 int query(kvPair *table, int numRecords, char key[]);
-int update(void);
+int update(kvPair *table, char key[], char newValue[]);
 int del(void);
 int showAll(void);
 
 // Helper functions
 void lower(char *str);
+int compare(const void *tmp1, const void *tmp2);
 
 #endif
