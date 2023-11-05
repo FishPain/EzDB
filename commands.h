@@ -10,16 +10,16 @@
 #define FILE_HEADER "Key Value"
 #define QUERY "query"
 
-struct kvPair {
+typedef struct kvPair {
     char key[MAX_CHAR_LEN];
     char value[MAX_CHAR_LEN];
-};
+} kvPair;
 
-int open(struct kvPair *table, char key[]);
-int save(struct kvPair *table, char key[]);
+int open(kvPair *table, char key[]);
+int save(kvPair *table, char key[]);
 int insert(void);
-int query(struct kvPair *table, int numRecords, char key[]);
-int update(struct kvPair *table, char key[], char newValue[]);
+int query(kvPair *table, int numRecords, char key[]);
+int update(void);
 int del(void);
 int showAll(void);
 
