@@ -12,24 +12,46 @@ void lower(char *str) // to lower a string.
 }
 
 /*
-comparison function to sort an array of struct kvPair
-*/ 
+comparison function to sort an array of kvPair
+*/
 int compare(const void *tmp1, const void *tmp2)
 {
-  struct kvPair *data1 = (struct kvPair *)tmp1;
-  struct kvPair *data2 = (struct kvPair *)tmp2;
-  // check if key (contact name) is same
-  int chCompare = strcmp(data1->key, data2->key);
-  if (chCompare == 0) {
-    // return value (number) in ascending order if key (contact name) is same
-    return data1->value - data2->value;
-  }
-  else {
-    return chCompare;
-  }
+    kvPair *data1 = (kvPair *)tmp1;
+    kvPair *data2 = (kvPair *)tmp2;
+    // check if key (contact name) is same
+    int chCompare = strcmp(data1->key, data2->key);
+    if (chCompare == 0)
+    {
+        // return value (number) in ascending order if key (contact name) is same
+        return data1->value - data2->value;
+    }
+    else
+    {
+        return chCompare;
+    }
 }
 
-int open(struct kvPair *table, char key[])
+/*
+comparison function to sort an array of kvPair
+*/
+int compare(const void *tmp1, const void *tmp2)
+{
+    kvPair *data1 = (kvPair *)tmp1;
+    kvPair *data2 = (kvPair *)tmp2;
+    // check if key (contact name) is same
+    int chCompare = strcmp(data1->key, data2->key);
+    if (chCompare == 0)
+    {
+        // return value (number) in ascending order if key (contact name) is same
+        return data1->value - data2->value;
+    }
+    else
+    {
+        return chCompare;
+    }
+}
+
+int open(kvPair *table, char key[])
 {
     FILE *phonebookPtr;
     char filePath[MAX_CHAR_LEN];
@@ -52,13 +74,14 @@ int open(struct kvPair *table, char key[])
         )
         {
             lower(table[c].key);
-            //printf("%s %s\n", table[c].key, table[c].value); // print out to show
-            c++;                                             // increment
+            // printf("%s %s\n", table[c].key, table[c].value); // print out to show
+            c++; // increment
         }
     }
     // sort using qsort, with comparator function passed in
-    qsort(table, c, sizeof(struct kvPair), compare);
-    for (int i = 0; i < c; i++) {
+    qsort(table, c, sizeof(kvPair), compare);
+    for (int i = 0; i < c; i++)
+    {
         printf("%s\t%s\n", table[i].key, table[i].value);
     }
 
@@ -66,7 +89,7 @@ int open(struct kvPair *table, char key[])
     return c;             // Return the number of records loaded
 }
 
-int save(struct kvPair *table, char key[])
+int save(kvPair *table, char key[])
 {
     FILE *phonebookPtr;
     char filePath[MAX_CHAR_LEN];
@@ -108,7 +131,7 @@ int insert(void)
     return 0;
 }
 
-int query(struct kvPair *table, int numRecords, char key[])
+int query(kvPair *table, int numRecords, char key[])
 {
     // Convert the input key to lowercase for case-insensitive comparison
     char lowerKey[MAX_CHAR_LEN];
@@ -146,9 +169,19 @@ int query(struct kvPair *table, int numRecords, char key[])
     return 1; // Record not found
 }
 
-int update(void)
+int update(kvPair *table, char key[], char newValue[])
 {
-    return 0;
+    for (int i = 0; i < MAX_LEN; i++)
+    {
+        if (strcmp(table[i].key, key) == 0)
+        {
+            snprintf(table[i].value, sizeof(table[i].value), "%s", newValue); // Update the value for the specific key
+            printf("The value for the record of Key=%s is successfully updated.\n", key);
+            return 0;
+        }
+    }
+    printf("Key=%s not found. Failed to update the value.\n", key);
+    return 1;
 }
 
 int del(void)

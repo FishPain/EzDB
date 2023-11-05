@@ -5,7 +5,7 @@
 
 int main()
 {
-    struct kvPair table[MAX_LEN];
+    kvPair table[MAX_LEN];
     char choice[MAX_CHAR_LEN];
     char operation[MAX_CHAR_LEN], key[MAX_CHAR_LEN], value[MAX_CHAR_LEN];
     int numRecords = 0;
@@ -63,6 +63,23 @@ int main()
             if (result != 0)
             {
                 printf("Failed to save the file. %d\n", result);
+                continue;
+            }
+        }
+
+        else if (strcmp(operation, UPDATE) == 0)
+        {
+            if (argCount != 3)
+            {
+                printf("Invalid number of arguments for UPDATE. Expecting: UPDATE <KEY> <NEW_VALUE>\n");
+                continue;
+            }
+            
+            int result = update(table, key, value);
+
+            if (result != 0)
+            {
+                printf("Failed to update the key. %d\n", result);
                 continue;
             }
         }
