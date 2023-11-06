@@ -83,23 +83,40 @@ void insertRecord(person *record)
     }
 }
 
+void delRecord(char *name)
+{
+    int key = hash(name);
+    if (table[key] != NULL && strcmp(table[key]->name, name) == 0)
+    {
+        printf("Record deleted!\n");
+        table[key] = NULL;
+        return;
+    }
+    else
+    {
+        printf("Record does not exist");
+    }
+}
+
 int getRecord(char *name)
 {
     char key = hash(name);
     person *head = table[key];
     if (head == NULL)
     {
-        printf("---No Record Found---\n");
+        printf("---NULL Record Found---\n");
         return 0;
     }
 
     do
     {
-        if (strcmp(head->name, name))
+        if (strcmp(head->name, name) == 0)
         {
             printf("Record Found---%s-%s---\n", head->name, head->number);
             return 1;
         }
+        else
+            printf("---No Record Found---\n");
 
         head = head->next;
     } while (head != NULL);
@@ -152,4 +169,9 @@ int main()
     getRecord("tony");
     getRecord("peter");
     getRecord("fakename");
+
+    printf("\n\n\n");
+    delRecord("grape");
+    // print to check updated table
+    printRecords();
 }
