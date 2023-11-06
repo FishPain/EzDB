@@ -74,12 +74,14 @@ int save(kvPair *table, char *key)
         char c[MAX_CHAR_LEN]; // define temp string to contain the concat Key Value Pair
         if (i == 0)
             snprintf(c, sizeof(c), "%s\n", FILE_HEADER); // concatation.
+            
         else
             snprintf(c, sizeof(c), "%s %s\n", table[i - 1].key, table[i - 1].value); // concatation.
 
         fputs(c, phonebookPtr); // write back into file.
         printf("%s", c);
     }
+
     fclose(phonebookPtr); // close file
     return 0;
 }

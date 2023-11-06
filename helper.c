@@ -154,18 +154,16 @@ void printRecords()
     printf("-----START-----\n");
     for (int i = 0; i < MAX_TABLE_SIZE; i++)
     {
-        if (table[i] == NULL)
+        phonebook *head = table[i];
+        if (head == NULL)
         {
             printf("------\n");
+            continue;
         }
-        else
+        while (head != NULL)
         {
-            phonebook *head = table[i];
-            do
-            {
-                printf("---%s-%s---\n", head->name, head->number);
-                head = head->next;
-            } while (head != NULL);
+            printf("---%s-%s---\n", head->name, head->number);
+            head = head->next;
         }
     }
     printf("-----END-----\n");
