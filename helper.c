@@ -83,32 +83,38 @@ void insertRecord(person *record)
     }
 }
 
-void delRecord(char *name)
+int delRecord(char *name)
 {
-    int key = hash(name);
-    if (table[key] != NULL && strcmp(table[key]->name, name) == 0)
+    char key = hash(name);
+    person *head = table[key];
+    person *prevHead = NULL;
+    while (head != NULL)
     {
-        printf("Record deleted!\n");
-        table[key] = NULL;
-        return;
+        if (strcmp(head->name, name) == 0)
+        {
+            printf("Deleted---%s-%s---\n", head->name, head->number);
+            if (prevHead == NULL)
+                table[key] = head->next;
+            else
+                prevHead->next = head->next;
+            return 1;
+        }
+        else
+        {
+            prevHead = head;
+            head = head->next;
+        }
     }
-    else
-    {
-        printf("Record does not exist");
-    }
+    printf("---Failed to delete---\n");
+    return 0;
 }
 
 int getRecord(char *name)
 {
     char key = hash(name);
     person *head = table[key];
-    if (head == NULL)
-    {
-        printf("---NULL Record Found---\n");
-        return 0;
-    }
 
-    do
+    while (head != NULL)
     {
         if (strcmp(head->name, name) == 0)
         {
@@ -116,11 +122,11 @@ int getRecord(char *name)
             return 1;
         }
         else
-            printf("---No Record Found---\n");
-
-        head = head->next;
-    } while (head != NULL);
-
+        {
+            head = head->next;
+        }
+    }
+    printf("---No Record Found---\n");
     return 0;
 }
 
@@ -163,15 +169,19 @@ int main()
     insertRecord(&grape);
     person apple = {.name = "apple", .number = "43523"};
     insertRecord(&apple);
-
     printRecords();
-
+    printf("\n");
     getRecord("tony");
+    printf("\n");
     getRecord("peter");
+    printf("\n");
     getRecord("fakename");
-
-    printf("\n\n\n");
+    printf("\n");
     delRecord("grape");
-    // print to check updated table
+    printf("\n");
+    delRecord("peter");
+    printf("\n");
+    delRecord("mockName");
+    printf("\n");
     printRecords();
 }
