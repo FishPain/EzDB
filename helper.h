@@ -20,4 +20,13 @@ typedef struct phonebook
 void lower(char *str);
 int compare(const void *tmp1, const void *tmp2);
 
+// Hashtable
+unsigned long hash(unsigned char *str);
+int initTable();
+int getRecord(char *name);
+int insertRecord(phonebook *record);
+int updateRecord(char *name, char *number);
+int delRecord(char *name);
+void printRecords();
+
 #endif

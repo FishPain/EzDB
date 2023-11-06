@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include "commands.h"
 
-int open(kvPair *table, char key[])
+int open(kvPair *table, char *key)
 {
     FILE *phonebookPtr;
     char filePath[MAX_CHAR_LEN];
@@ -47,7 +47,7 @@ int open(kvPair *table, char key[])
     return c;             // Return the number of records loaded
 }
 
-int save(kvPair *table, char key[])
+int save(kvPair *table, char *key)
 {
     FILE *phonebookPtr;
     char filePath[MAX_CHAR_LEN];

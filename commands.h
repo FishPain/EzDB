@@ -9,8 +9,8 @@
 #define QUERY "query"
 #include "helper.h"
 
-int open(kvPair *table, char key[]);
-int save(kvPair *table, char key[]);
+int open(kvPair *table, char *key);
+int save(kvPair *table, char *key);
 int insert(void);
 int query(kvPair *table, int numRecords, char key[]);
 int update(kvPair *table, char key[], char newValue[]);

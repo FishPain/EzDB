@@ -15,7 +15,6 @@ int main()
         printf("Enter Your Choice:\n");
         fgets(choice, MAX_CHAR_LEN, stdin);                               // get the user input
         int argCount = sscanf(choice, "%s %s %s", operation, key, value); // split user input into 3 variables
-        /* Eg. Req: operation, key, value but only input operation, key -> argCount = 2; */
         lower(operation); // to lower the operation command
 
         if (strcmp(operation, OPEN) == 0)
