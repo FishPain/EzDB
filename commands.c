@@ -35,29 +35,34 @@ int open(kvPair *table, char key[])
 {
     FILE *phonebookPtr;
     char filePath[MAX_CHAR_LEN];
+    char text[MAX_CHAR_LEN];
+    int c = 0; // counter
+
     snprintf(filePath, sizeof(filePath), "data/%s", key);
     phonebookPtr = fopen(filePath, "r");
+
     if (phonebookPtr == NULL)
     {
         perror("Error opening file");
         return -1;
     }
-    int c = 0; // counter
-    char text[MAX_CHAR_LEN];
 
-    while (fgets(text, MAX_CHAR_LEN, phonebookPtr) != NULL) // get each row of text file and save to text[]
-    {
-        text[strcspn(text, "\n")] = '\0';                            // Remove tailing \n and change it to \0 (represents the end of line)
-        if (strcmp(text, FILE_HEADER) != 0 &&                        // Ignore the column header in txt file
-            sscanf(text, "%s %s", table[c].key, table[c].value) == 2 // Split the string into 2 parts.
-            // sscanf will return num of variables retrieved.
-        )
-        {
+    if (fgets(text, MAX_CHAR_LEN, phonebookPtr) == NULL) {
+        perror("Failed to read the header");
+        fclose(phonebookPtr);
+        return -1;
+    }
+
+    // Process the remaining lines
+    while (fgets(text, MAX_CHAR_LEN, phonebookPtr) != NULL) {
+        if (sscanf(text, "%s %s", table[c].key, table[c].value) == 2) {
             lower(table[c].key);
-            // printf("%s %s\n", table[c].key, table[c].value); // print out to show
             c++; // increment
+        } else {
+            printf("Error parsing line: %s\n", text);
         }
     }
+
     // sort using qsort, with comparator function passed in
     qsort(table, c, sizeof(kvPair), compare);
     for (int i = 0; i < c; i++)
@@ -78,13 +83,13 @@ int save(kvPair *table, char key[])
     snprintf(c, sizeof(c), "%s %s\n", table[0].key, table[0].value); // concatation.
     if (strlen(c) <= 2)
     {
-        fclose(phonebookPtr); // close file
         perror("File was never opened. Aborted Save.");
         return 1;
     }
 
     snprintf(filePath, sizeof(filePath), "data/%s", key);
     phonebookPtr = fopen(filePath, "w");
+
     if (phonebookPtr == NULL)
     {
         perror("Error opening file");
