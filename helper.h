@@ -9,6 +9,13 @@ typedef struct kvPair {
     char value[MAX_CHAR_LEN];
 } kvPair;
 
+typedef struct phonebook
+{
+    char name[MAX_CHAR_LEN];   // the key
+    char number[MAX_CHAR_LEN]; // the value
+    struct phonebook *next;       // chaining to tackle collision
+} phonebook;
+
 // Helper functions
 void lower(char *str);
 int compare(const void *tmp1, const void *tmp2);

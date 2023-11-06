@@ -31,17 +31,8 @@ int compare(const void *tmp1, const void *tmp2)
     }
 }
 
-/* Hashtable implimentation */
-
-typedef struct person
-{
-    char name[MAX_CHAR_LEN];   // the key
-    char number[MAX_CHAR_LEN]; // the value
-    struct person *next;       // chaining to tackle collision
-} person;
-
 // define globally the hash table
-person *table[MAX_TABLE_SIZE];
+phonebook *table[MAX_TABLE_SIZE];
 
 // djb2 hash function by dan bernstein [Mckenzie et al. Selecting a Hashing Algorithm, SP&E 20(2):209-224, Feb 1990]
 unsigned long hash(unsigned char *str)
@@ -67,7 +58,7 @@ int initTable()
 }
 
 // used a linked list for collision handling
-int insertRecord(person *record)
+int insertRecord(phonebook *record)
 {
     unsigned long hashedName = hash(record->name);
     if (table[hashedName] == NULL)
@@ -76,7 +67,7 @@ int insertRecord(person *record)
     }
     else
     {
-        person *head = table[hashedName];
+        phonebook *head = table[hashedName];
         while (head->next != NULL)
         {
             head = head->next;
@@ -90,8 +81,8 @@ int insertRecord(person *record)
 int delRecord(char *name)
 {
     char key = hash(name);
-    person *head = table[key];
-    person *prevHead = NULL;
+    phonebook *head = table[key];
+    phonebook *prevHead = NULL;
     while (head != NULL)
     {
         if (strcmp(head->name, name) == 0)
@@ -116,7 +107,7 @@ int delRecord(char *name)
 int getRecord(char *name)
 {
     char key = hash(name);
-    person *head = table[key];
+    phonebook *head = table[key];
 
     while (head != NULL)
     {
@@ -145,7 +136,7 @@ void printRecords()
         }
         else
         {
-            person *head = table[i];
+            phonebook *head = table[i];
             do
             {
                 printf("---%s-%s---\n", head->name, head->number);
@@ -159,19 +150,19 @@ void printRecords()
 int main()
 {
     initTable();
-    person record = {.name = "Tom", .number = "12345"};
-    insertRecord(&record);
-    person marry = {.name = "marry", .number = "34234"};
+    phonebook Tom = {.name = "Tom", .number = "12345"};
+    insertRecord(&Tom);
+    phonebook marry = {.name = "marry", .number = "34234"};
     insertRecord(&marry);
-    person peter = {.name = "peter", .number = "2424"};
+    phonebook peter = {.name = "peter", .number = "2424"};
     insertRecord(&peter);
-    person gran = {.name = "gran", .number = "64745612"};
+    phonebook gran = {.name = "gran", .number = "64745612"};
     insertRecord(&gran);
-    person tony = {.name = "tony", .number = "13452"};
+    phonebook tony = {.name = "tony", .number = "13452"};
     insertRecord(&tony);
-    person grape = {.name = "grape", .number = "6735566"};
+    phonebook grape = {.name = "grape", .number = "6735566"};
     insertRecord(&grape);
-    person apple = {.name = "apple", .number = "43523"};
+    phonebook apple = {.name = "apple", .number = "43523"};
     insertRecord(&apple);
     printRecords();
     printf("\n");
