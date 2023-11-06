@@ -146,37 +146,3 @@ void printRecords()
     }
     printf("-----END-----\n");
 }
-
-int main()
-{
-    initTable();
-    phonebook Tom = {.name = "Tom", .number = "12345"};
-    insertRecord(&Tom);
-    phonebook marry = {.name = "marry", .number = "34234"};
-    insertRecord(&marry);
-    phonebook peter = {.name = "peter", .number = "2424"};
-    insertRecord(&peter);
-    phonebook gran = {.name = "gran", .number = "64745612"};
-    insertRecord(&gran);
-    phonebook tony = {.name = "tony", .number = "13452"};
-    insertRecord(&tony);
-    phonebook grape = {.name = "grape", .number = "6735566"};
-    insertRecord(&grape);
-    phonebook apple = {.name = "apple", .number = "43523"};
-    insertRecord(&apple);
-    printRecords();
-    printf("\n");
-    getRecord("tony");
-    printf("\n");
-    getRecord("peter");
-    printf("\n");
-    getRecord("fakename");
-    printf("\n");
-    delRecord("grape");
-    printf("\n");
-    delRecord("peter");
-    printf("\n");
-    delRecord("mockName");
-    printf("\n");
-    printRecords();
-}
