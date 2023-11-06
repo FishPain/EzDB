@@ -60,14 +60,15 @@ int initTable()
 // used a linked list for collision handling
 int insertRecord(phonebook *record)
 {
-    unsigned long hashedName = hash(record->name);
-    if (table[hashedName] == NULL)
+    unsigned long key = hash(record->name);
+    phonebook *head = table[key];
+
+    if (head == NULL)
     {
-        table[hashedName] = record;
+        table[key] = record;
     }
     else
     {
-        phonebook *head = table[hashedName];
         while (head->next != NULL)
         {
             head = head->next;
@@ -78,9 +79,32 @@ int insertRecord(phonebook *record)
     return 1;
 }
 
+// used a linked list for collision handling
+int updateRecord(char *name, char *number)
+{
+    unsigned long key = hash(name);
+    phonebook *head = table[key];
+
+    while (head != NULL)
+    {
+        if (strcmp(head->name, name) == 0)
+        {
+            strcpy(head->number, number);
+            printf("Record Updated---%s-%s---\n", head->name, number);
+            return 1;
+        }
+        else
+        {
+            head = head->next;
+        }
+    }
+    printf("---No Record Found---\n");
+    return 1;
+}
+
 int delRecord(char *name)
 {
-    char key = hash(name);
+    unsigned long key = hash(name);
     phonebook *head = table[key];
     phonebook *prevHead = NULL;
     while (head != NULL)
@@ -106,7 +130,7 @@ int delRecord(char *name)
 
 int getRecord(char *name)
 {
-    char key = hash(name);
+    unsigned long key = hash(name);
     phonebook *head = table[key];
 
     while (head != NULL)
@@ -146,3 +170,43 @@ void printRecords()
     }
     printf("-----END-----\n");
 }
+/* Testing code
+int main()
+{
+    initTable();
+    phonebook Tom = {.name = "Tom", .number = "12345"};
+    insertRecord(&Tom);
+    phonebook marry = {.name = "marry", .number = "34234"};
+    insertRecord(&marry);
+    phonebook peter = {.name = "peter", .number = "2424"};
+    insertRecord(&peter);
+    phonebook gran = {.name = "gran", .number = "64745612"};
+    insertRecord(&gran);
+    phonebook tony = {.name = "tony", .number = "13452"};
+    insertRecord(&tony);
+    phonebook grape = {.name = "grape", .number = "6735566"};
+    insertRecord(&grape);
+    phonebook apple = {.name = "apple", .number = "43523"};
+    insertRecord(&apple);
+    printRecords();
+    printf("\n");
+    getRecord("tony");
+    printf("\n");
+    getRecord("peter");
+    printf("\n");
+    getRecord("fakename");
+    printf("\n");
+    delRecord("grape");
+    printf("\n");
+    delRecord("peter");
+    printf("\n");
+    delRecord("mockName");
+    printf("\n");
+    printRecords();
+    updateRecord("tony", "new number");
+    printf("\n");
+    updateRecord("mockName", "new number");
+    printf("\n");
+    printRecords();
+}
+*/
