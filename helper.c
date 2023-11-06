@@ -56,16 +56,18 @@ unsigned long hash(unsigned char *str)
 }
 
 // initialise an empty table w fixed size
-void initTable()
+int initTable()
 {
     for (int i = 0; i < MAX_TABLE_SIZE; i++)
     {
         table[i] = NULL; // set to null pointers for all at the start
     }
+    printf("---Table Created---\n");
+    return 1;
 }
 
 // used a linked list for collision handling
-void insertRecord(person *record)
+int insertRecord(person *record)
 {
     unsigned long hashedName = hash(record->name);
     if (table[hashedName] == NULL)
@@ -81,6 +83,8 @@ void insertRecord(person *record)
         }
         head->next = record;
     }
+    printf("---Record Added---\n");
+    return 1;
 }
 
 int delRecord(char *name)
