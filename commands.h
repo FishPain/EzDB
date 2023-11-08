@@ -11,7 +11,7 @@
 
 int open(kvPair *table, char *key);
 int save(kvPair *table, char *key);
-int insert(void);
+int insert(kvPair *table, char key[], char value[]);
 int query(kvPair *table, int numRecords, char key[]);
 int update(kvPair *table, char key[], char newValue[]);
 int del(void);
