@@ -19,6 +19,7 @@ typedef struct phonebook
 // Helper functions
 void lower(char *str);
 int compare(const void *tmp1, const void *tmp2);
+int printDeclaration();
 
 // Hashtable
 unsigned long hash(unsigned char *str);

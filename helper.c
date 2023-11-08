@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <string.h>
 #include "helper.h"
 
 void lower(char *str) // to lower a string.
@@ -31,11 +32,34 @@ int compare(const void *tmp1, const void *tmp2)
     }
 }
 
+int printDeclaration()
+{
+    FILE *declarationPtr;
+    char line[100000];
+
+    declarationPtr = fopen("data/declaration.txt", "r");
+    if (declarationPtr == NULL)
+    {
+        perror("Error opening declaration file");
+        return -1;
+    }
+
+    while (fgets(line, 100000, declarationPtr) != NULL)
+    {
+        line[strcspn(line, "\n")]='\0';
+        printf("%s\n", line);
+    }
+
+    fclose(declarationPtr);
+    printf("\n");
+    return 0;
+}
+
 // define globally the hash table
 phonebook *table[MAX_TABLE_SIZE];
 
 // djb2 hash function by dan bernstein [Mckenzie et al. Selecting a Hashing Algorithm, SP&E 20(2):209-224, Feb 1990]
-unsigned long hash(unsigned char *str)
+unsigned long hash(char *str)
 {
     unsigned long hash = 5381;
     int c;

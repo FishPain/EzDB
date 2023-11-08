@@ -10,6 +10,8 @@ int main()
     char operation[MAX_CHAR_LEN], key[MAX_CHAR_LEN], value[MAX_CHAR_LEN];
     int numRecords = 0;
 
+    printDeclaration();
+    
     while (1)
     {
         printf("Enter Your Choice:\n");
