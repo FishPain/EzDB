@@ -49,6 +49,22 @@ int main()
             }
         }
 
+        else if (strcmp(operation, INSERT) == 0)
+        {
+            if (argCount != 3)
+            {
+                printf("Invalid number of arguments for INSERT. Expecting: INSERT <KEY> <VALUE>\n");
+                continue;
+            }
+            
+            int result = insert(table, key, value);
+
+            if (result != 0) {
+                printf("Failed to insert %d\n", result);
+                continue;
+            }
+        }
+
         else if (strcmp(operation, UPDATE) == 0)
         {
             if (argCount != 3)

@@ -3,6 +3,7 @@
 #define OPEN "open"
 #define SAVE "save"
 #define SHOW_ALL "show_all"
+#define INSERT "insert"
 #define UPDATE "update"
 #define EXIT "exit"
 #define FILE_HEADER "Key Value"

@@ -88,21 +88,20 @@ int save(kvPair *table, char *key)
 
 int insert(kvPair *table, char key[], char value[])
 {
-    // check if key already exists?
+    int counter = 0;
     for (int i = 0; i < MAX_LEN; i++)
     {
-        if (strcmp(table[i].key, key) == 0)
+        if (strcmp(table[i].key, key) == 0) // Check for existing key
         {
-            printf("Key: %s already exists. Failed to insert the record.\n", key);
+            printf("Existing key detected: %s \n", table[i].key);
             return 1;
         }
+        counter++;
     }
-
-    // Write the key value pair to the file
-    fprintf(table, "%s %s\n", key, value);
-    printf("A record of Key: %s, Value: %s is inserted into the database.\n", key, value);
-
-    return 0;
+    snprintf(table[counter].key, MAX_CHAR_LEN, "%s", key);
+    snprintf(table[counter].value, MAX_CHAR_LEN, "%s", value);
+    printf("Success will insert to table key: %s, value: %s\n");
+    return 0; // success
 }
 
 int query(kvPair *table, int numRecords, char key[])

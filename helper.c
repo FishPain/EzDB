@@ -59,7 +59,7 @@ int printDeclaration()
 phonebook *table[MAX_TABLE_SIZE];
 
 // djb2 hash function by dan bernstein [Mckenzie et al. Selecting a Hashing Algorithm, SP&E 20(2):209-224, Feb 1990]
-unsigned long hash(char *str)
+unsigned long hash(unsigned char *str)
 {
     unsigned long hash = 5381;
     int c;
