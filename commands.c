@@ -5,6 +5,7 @@
 #include "commands.h"
 #include "table.h"
 
+
 int open(char *key, int isHash)
 {
     FILE *phonebookPtr;
@@ -63,6 +64,7 @@ int open(char *key, int isHash)
 }
 
 int save(char *key, int isHash)
+
 {
     FILE *phonebookPtr;
     char filePath[MAX_CHAR_LEN];
