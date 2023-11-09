@@ -15,17 +15,18 @@ int main(int argc, char *argv[])
     int numRecords = 0;
 
     int isHash = getFlag(argc, argv); // feature flag for hashtable. Default to 0;
-    printDeclaration();
+
+    printDeclaration(); // print student declaration
 
     if (isHash)
         initTable();
 
     while (1)
     {
-        printf("Enter Your Choice (%s):\n", isHash ? "Hashtable" : "Linear Search"); // indicator if it is hashtable or linear search
-        fgets(choice, MAX_CHAR_LEN, stdin);                                          // get the user input
-        int argCount = sscanf(choice, "%s %s %s", operation, key, value);            // split user input into 3 variables
-        lower(operation);                                                            // to lower the operation command
+        printf("Enter Your Choice (%s):\n", isHash ? "Hashtable" : "Linear Search");
+        fgets(choice, MAX_CHAR_LEN, stdin);                               // get the user input
+        int argCount = sscanf(choice, "%s %s %s", operation, key, value); // split user input into 3 variables
+        lower(operation);                                                 // to lower the operation command
 
         if (strcmp(operation, OPEN) == 0)
         {
@@ -36,7 +37,8 @@ int main(int argc, char *argv[])
             }
 
             int numRecords = open(key, isHash); // calling the function and storing the number of records
-            if (numRecords == -1)
+
+            if (numRecords == -1) // check if the function failed to open the file.
             {
                 printf("Failed to open the file. %d\n", numRecords);
                 continue;
@@ -50,7 +52,9 @@ int main(int argc, char *argv[])
                 printf("Missing Filename. Expecting: SAVE <FILE_NAME>\n");
                 continue;
             }
+
             int result = save(key, isHash);
+
             if (result != 0)
             {
                 printf("Failed to save the file. %d\n", result);
@@ -82,7 +86,9 @@ int main(int argc, char *argv[])
                 printf("Invalid number of arguments for Query. Expecting: QUERY <KEY>\n");
                 continue;
             }
+
             int result = query(numRecords, key, isHash);
+
             if (result == 0)
             {
                 // Query was successful
@@ -94,10 +100,7 @@ int main(int argc, char *argv[])
                 printf("Query failed. The key '%s' was not found in the database.\n", key);
             }
         }
-        else if (strcmp(operation, SHOW_ALL) == 0)
-        {
-            int result = showAll(isHash);
-        }
+
         else if (strcmp(operation, INSERT) == 0)
         {
             if (argCount != 3)
@@ -105,13 +108,16 @@ int main(int argc, char *argv[])
                 printf("Invalid number of arguments for INSERT. Expecting: INSERT <KEY> <VALUE>\n");
                 continue;
             }
+
             int result = insert(key, value, isHash);
+
             if (result != 0)
             {
                 printf("Failed to insert record %d\n", result);
                 continue;
             }
         }
+
         else if (strcmp(operation, DELETE) == 0)
         {
             if (argCount != 2)
@@ -119,17 +125,26 @@ int main(int argc, char *argv[])
                 printf("Invalid number of arguments for DELETE. Expecting: DELETE <KEY>\n");
                 continue;
             }
+
             int result = del(numRecords, key, isHash);
+
             if (result != 0)
             {
                 printf("Failed to delete record %d\n", result);
                 continue;
             }
         }
+
+        else if (strcmp(operation, SHOW_ALL) == 0)
+        {
+            int result = showAll(isHash);
+        }
+
         else if (strcmp(operation, EXIT) == 0)
         {
             break;
         }
+
         else
         {
             continue;
