@@ -66,18 +66,27 @@ int insertRecord(phonebook *record)
     // If the list is empty at this hash, insert the record as the head
     if (head == NULL)
         table[key] = record;
+
     else
     {
         // If there are elements in the list, traverse to the end
         while (head->next != NULL)
+        {
+            // Abort insert if the record already exists in the list
+            if (strcmp(head->name, record->name) == 0)
+            {
+                printf("The record with Key=%s already exists in the database.\n", record->name);
+                return 1;
+            }
             head = head->next;
+        }
 
         // Add the new record to the end of the list
         head->next = record;
     }
 
     // Print a message indicating that the record has been added
-    printf("---Record Added %s-%s---\n", record->name, record->number);
+    printf("A new record of Key=%s, Value=%s is successfully inserted.\n", record->name, record->number);
     return 0;
 }
 
@@ -105,7 +114,7 @@ int updateRecord(char *name, char *number)
             strcpy(head->number, number);
 
             // Print a message indicating that the record has been updated
-            printf("Record Updated---%s-%s---\n", head->name, number);
+            printf("“The value for the record of Key=%s is successfully updated.\n", head->name);
             return 0;
         }
         else
@@ -115,7 +124,7 @@ int updateRecord(char *name, char *number)
     }
 
     // If no matching record is found, print a message and return an error code
-    printf("---No Record Found---\n");
+    printf("There is no record with Key=%s found in the database.\n", name);
     return 1;
 }
 
@@ -140,7 +149,7 @@ int delRecord(char *name)
         if (strcmp(head->name, name) == 0)
         {
             // Print a message indicating that the record has been deleted
-            printf("Deleted---%s-%s---\n", head->name, head->number);
+            printf("The record of Key=%s is successfully deleted.\n", head->name);
 
             // Update the pointers to remove the record from the linked list
             if (prevHead == NULL)
@@ -163,7 +172,7 @@ int delRecord(char *name)
     }
 
     // If no matching record is found, print a message and return an error code
-    printf("---Failed to delete---\n");
+    printf("There is no record with Key=%s found in the database.\n", name);
     return 1;
 }
 
@@ -187,7 +196,7 @@ int getRecord(char *name)
         if (strcmp(head->name, name) == 0)
         {
             // Print the found record's information
-            printf("Record Found---%s-%s---\n", head->name, head->number);
+            printf("A record of Key=%s, Value=%s is found in the database\n", head->name, head->number);
             return 0; // Return 0 to indicate success
         }
         else
@@ -198,7 +207,7 @@ int getRecord(char *name)
     }
 
     // If the loop completes without finding the record, print a message
-    printf("---No Record Found---\n");
+    printf("There is no record with Key=%s found in the database.\n", name);
     return 1; // Return 1 to indicate failure
 }
 
@@ -209,31 +218,24 @@ int getRecord(char *name)
  */
 int printRecords()
 {
-    printf("-----START-----\n");
-
+    int counter = 0;
     // Iterate through each index in the hash table
     for (int i = 0; i < MAX_TABLE_SIZE; i++)
     {
         // Get the pointer to the head of the linked list at the current index
         phonebook *head = table[i];
 
-        // If the linked list at the current index is empty, print a separator and continue to the next index
-        if (head == NULL)
-        {
-            printf("------\n");
-            continue;
-        }
-
         // Iterate through the linked list at the current index
         while (head != NULL)
         {
             // Print the information of each record in the linked list
-            printf("---%s-%s---\n", head->name, head->number);
+            printf("%s %s\n", head->name, head->number);
+            counter++;
             // Move to the next node in the linked list
             head = head->next;
         }
     }
 
-    printf("-----END-----\n");
+    printf("There are in total %d records found.", counter);
     return 0;
 }
