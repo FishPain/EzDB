@@ -84,6 +84,7 @@ int delRecord(char *name)
                 table[key] = head->next;
             else
                 prevHead->next = head->next;
+            free(head);
             return 0;
         }
         else

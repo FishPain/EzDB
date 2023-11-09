@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include "commands.h"
 #include "table.h"
-
+#include "helper.h"
 
 int open(char *key, int isHash)
 {
