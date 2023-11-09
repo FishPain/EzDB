@@ -1,5 +1,5 @@
 CC = gcc
-SRC = main.c
+SRC = table.c helper.c commands.c main.c
 OBJS = $(SRC:.c=.o)
 EXEC = ezdb
 
