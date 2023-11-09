@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "commands.h": "c"
+        "commands.h": "c",
+        "helper.h": "c"
     },
     "makefile.makefilePath": "Makefile",
     "makefile.makePath": "make.exe",
