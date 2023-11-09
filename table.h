@@ -12,7 +12,6 @@ typedef struct phonebook
 
 extern struct phonebook *table[MAX_TABLE_SIZE];
 
-// Hashtable
 unsigned long hash(unsigned char *str);
 int initTable();
 int getRecord(char *name);
@@ -20,5 +19,4 @@ int insertRecord(phonebook *record);
 int updateRecord(char *name, char *number);
 int delRecord(char *name);
 int printRecords();
-
 #endif

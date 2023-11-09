@@ -10,7 +10,6 @@ struct phonebook *table[MAX_TABLE_SIZE];
 
 int main(int argc, char *argv[])
 {
-
     char choice[MAX_CHAR_LEN];
     char operation[MAX_CHAR_LEN], key[MAX_CHAR_LEN], value[MAX_CHAR_LEN];
     int numRecords = 0;
@@ -36,7 +35,7 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            numRecords = open(key, isHash); // calling the function and storing the number of records
+            int numRecords = open(key, isHash); // calling the function and storing the number of records
             if (numRecords == -1)
             {
                 printf("Failed to open the file. %d\n", numRecords);
@@ -120,7 +119,7 @@ int main(int argc, char *argv[])
                 printf("Invalid number of arguments for DELETE. Expecting: DELETE <KEY>\n");
                 continue;
             }
-            int result = del(key, isHash);
+            int result = del(numRecords, key, isHash);
             if (result != 0)
             {
                 printf("Failed to delete record %d\n", result);

@@ -4,9 +4,13 @@
 #include <ctype.h>
 #include "table.h"
 
-// djb2 hash function by dan bernstein [Mckenzie et al. Selecting a Hashing Algorithm, SP&E 20(2):209-224, Feb 1990]
-unsigned long hash(unsigned char *str)
-{
+/**
+ * djb2 hash function by Dan Bernstein [Mckenzie et al. Selecting a Hashing Algorithm, SP&E 20(2):209-224, Feb 1990]
+ * 
+ * @param str The string to be hashed.
+ * @return The hash value.
+ */
+unsigned long hash(unsigned char *str) {
     unsigned long hash = 5381;
     int c;
 
@@ -16,28 +20,32 @@ unsigned long hash(unsigned char *str)
     return hash % MAX_TABLE_SIZE;
 }
 
-// initialise an empty table w fixed size
-int initTable()
-{
-    for (int i = 0; i < MAX_TABLE_SIZE; i++)
-    {
-        table[i] = NULL; // set to null pointers for all at the start
+/**
+ * Initializes an empty hashtable with a fixed size.
+ * 
+ * @return 0 if the operation is successful.
+ */
+int initTable() {
+    for (int i = 0; i < MAX_TABLE_SIZE; i++) {
+        table[i] = NULL; // Set to null pointers for all at the start
     }
     printf("---Table Created---\n");
     return 0;
 }
 
-// used a linked list for collision handling
-int insertRecord(phonebook *record)
-{
+/**
+ * Inserts a record into the hashtable using linked list for collision handling.
+ * 
+ * @param record The phonebook record to be inserted.
+ * @return 0 if the operation is successful.
+ */
+int insertRecord(phonebook *record) {
     unsigned long key = hash(record->name);
     phonebook *head = table[key];
 
     if (head == NULL)
         table[key] = record;
-
-    else
-    {
+    else {
         while (head->next != NULL)
             head = head->next;
 
@@ -48,21 +56,23 @@ int insertRecord(phonebook *record)
     return 0;
 }
 
-int updateRecord(char *name, char *number)
-{
+/**
+ * Updates a record in the hashtable.
+ * 
+ * @param name The name of the record to be updated.
+ * @param number The new number to be associated with the record.
+ * @return 0 if the operation is successful, 1 if no record is found.
+ */
+int updateRecord(char *name, char *number) {
     unsigned long key = hash(name);
     phonebook *head = table[key];
 
-    while (head != NULL)
-    {
-        if (strcmp(head->name, name) == 0)
-        {
+    while (head != NULL) {
+        if (strcmp(head->name, name) == 0) {
             strcpy(head->number, number);
             printf("Record Updated---%s-%s---\n", head->name, number);
             return 0;
-        }
-        else
-        {
+        } else {
             head = head->next;
         }
     }
@@ -70,25 +80,28 @@ int updateRecord(char *name, char *number)
     return 1;
 }
 
-int delRecord(char *name)
-{
+/**
+ * Deletes a record from the hashtable.
+ * 
+ * @param name The name of the record to be deleted.
+ * @return 0 if the operation is successful, 1 if no record is found.
+ */
+int delRecord(char *name) {
     unsigned long key = hash(name);
     phonebook *head = table[key];
     phonebook *prevHead = NULL;
-    while (head != NULL)
-    {
-        if (strcmp(head->name, name) == 0)
-        {
+
+    while (head != NULL) {
+        if (strcmp(head->name, name) == 0) {
             printf("Deleted---%s-%s---\n", head->name, head->number);
             if (prevHead == NULL)
                 table[key] = head->next;
             else
                 prevHead->next = head->next;
+
             free(head);
             return 0;
-        }
-        else
-        {
+        } else {
             prevHead = head;
             head = head->next;
         }
@@ -97,20 +110,21 @@ int delRecord(char *name)
     return 1;
 }
 
-int getRecord(char *name)
-{
+/**
+ * Retrieves a record from the hashtable.
+ * 
+ * @param name The name of the record to be retrieved.
+ * @return 0 if the operation is successful, 1 if no record is found.
+ */
+int getRecord(char *name) {
     unsigned long key = hash(name);
     phonebook *head = table[key];
 
-    while (head != NULL)
-    {
-        if (strcmp(head->name, name) == 0)
-        {
+    while (head != NULL) {
+        if (strcmp(head->name, name) == 0) {
             printf("Record Found---%s-%s---\n", head->name, head->number);
             return 0;
-        }
-        else
-        {
+        } else {
             head = head->next;
         }
     }
@@ -118,24 +132,28 @@ int getRecord(char *name)
     return 1;
 }
 
-int printRecords()
-{
+/**
+ * Prints all records in the hashtable.
+ * 
+ * @return 0 if the operation is successful.
+ */
+int printRecords() {
     printf("-----START-----\n");
-    for (int i = 0; i < MAX_TABLE_SIZE; i++)
-    {
+
+    for (int i = 0; i < MAX_TABLE_SIZE; i++) {
         phonebook *head = table[i];
-        if (head == NULL)
-        {
+
+        if (head == NULL) {
             printf("------\n");
             continue;
         }
-        while (head != NULL)
-        {
+
+        while (head != NULL) {
             printf("---%s-%s---\n", head->name, head->number);
             head = head->next;
         }
     }
+
     printf("-----END-----\n");
     return 0;
 }
-

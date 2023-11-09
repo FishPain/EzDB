@@ -6,6 +6,13 @@
 #include "table.h"
 #include "helper.h"
 
+/**
+ * Opens a file and loads data into memory.
+ *
+ * @param key The name of the file to open.
+ * @param isHash Flag indicating whether to use a hash table for data storage.
+ * @return The number of records loaded on success, or -1 on failure.
+ */
 int open(char *key, int isHash)
 {
     FILE *phonebookPtr;
@@ -13,15 +20,20 @@ int open(char *key, int isHash)
     char text[MAX_CHAR_LEN];
     int c = 0; // counter
 
+    // Construct the file path
     snprintf(filePath, sizeof(filePath), "data/%s", key);
+
+    // Open the file for reading
     phonebookPtr = fopen(filePath, "r");
 
+    // Check for file opening errors
     if (phonebookPtr == NULL)
     {
         perror("Error opening file");
         return -1;
     }
 
+    // Read the header line
     if (fgets(text, MAX_CHAR_LEN, phonebookPtr) == NULL)
     {
         perror("Failed to read the header");
@@ -29,11 +41,13 @@ int open(char *key, int isHash)
         return -1;
     }
 
-    // Process the remaining lines
+    // Process the remaining lines in the file
     while (fgets(text, MAX_CHAR_LEN, phonebookPtr) != NULL)
     {
-        phonebook *record = malloc(sizeof(phonebook)); // Allocate memory
+        // Allocate memory for a new phonebook record
+        phonebook *record = malloc(sizeof(phonebook));
 
+        // Check for memory allocation errors
         if (record == NULL)
         {
             perror("Memory allocation failed");
@@ -41,6 +55,7 @@ int open(char *key, int isHash)
             return -1;
         }
 
+        // Parse the line and populate the record fields
         if (sscanf(text, "%s %s", record->name, record->number) == 2)
         {
             lower(record->name);
@@ -56,19 +71,32 @@ int open(char *key, int isHash)
         }
     }
 
-    // sort using qsort, with comparator function passed in
+    // Sort the data using qsort (commented out)
     // qsort(table, c, sizeof(phonebook), compare);
+
+    // Print the loaded records
     printRecords();
-    fclose(phonebookPtr); // close the file
-    return c;             // Return the number of records loaded
+
+    // Close the file
+    fclose(phonebookPtr);
+
+    // Return the number of records loaded
+    return c;
 }
 
+/**
+ * Saves data to a file.
+ *
+ * @param key The name of the file to save.
+ * @param isHash Flag indicating whether to use a hash table for data storage.
+ * @return 0 on success, -1 on failure.
+ */
 int save(char *key, int isHash)
-
 {
     FILE *phonebookPtr;
     char filePath[MAX_CHAR_LEN];
 
+    // Check if there is data to save
     int isEmpty = 1;
     for (int i = 0; i < MAX_TABLE_SIZE; i++)
     {
@@ -85,17 +113,23 @@ int save(char *key, int isHash)
         return -1;
     }
 
+    // Construct the file path
     snprintf(filePath, sizeof(filePath), "data/%s", key);
+
+    // Open the file for writing
     phonebookPtr = fopen(filePath, "w");
 
+    // Check for file opening errors
     if (phonebookPtr == NULL)
     {
         perror("Error opening file");
         return -1;
     }
 
-    fprintf(phonebookPtr, "%s\n", FILE_HEADER); // add file header
+    // Add file header
+    fprintf(phonebookPtr, "%s\n", FILE_HEADER);
 
+    // Write data to the file
     for (int i = 0; i < MAX_TABLE_SIZE; i++)
     {
         phonebook *head = table[i];
@@ -107,25 +141,53 @@ int save(char *key, int isHash)
         }
     }
 
-    fclose(phonebookPtr); // close file
+    // Close the file
+    fclose(phonebookPtr);
+
+    // Return success
     return 0;
 }
 
+/**
+ * Inserts a new record into the data structure.
+ *
+ * @param key The key of the record.
+ * @param value The value of the record.
+ * @param isHash Flag indicating whether to use a hash table for data storage.
+ * @return 0 on success, -1 on failure.
+ */
 int insert(char *key, char *value, int isHash)
-{        
-    phonebook *record = malloc(sizeof(phonebook)); // Allocate memory
+{
+    // Allocate memory for a new phonebook record
+    phonebook *record = malloc(sizeof(phonebook));
+
+    // Check for memory allocation errors
+    if (record == NULL)
+    {
+        perror("Memory allocation failed");
+        return -1;
+    }
+
+    // Populate the record fields
     if (isHash)
     {
-
         snprintf(record->name, sizeof(record->name), "%s", key);
         snprintf(record->number, sizeof(record->number), "%s", value);
         insertRecord(record);
-        return 0;
     }
+
+    // Return success
     return 0;
 }
 
-int query(int numRecords, char *key, int isHash)
+/**
+ * Queries for a record based on the key.
+ *
+ * @param key The key to search for.
+ * @param isHash Flag indicating whether to use a hash table for data storage.
+ * @return 0 if the record is found, 1 if not found.
+ */
+int query(char *key, int isHash)
 {
     if (isHash)
         return getRecord(key);
@@ -139,7 +201,7 @@ int query(int numRecords, char *key, int isHash)
     }
 
     // Iterate through the records in the table to find a matching key
-    for (int i = 0; i < numRecords; i++)
+    for (int i = 0; i < MAX_TABLE_SIZE; i++)
     {
         // Get the stored key and convert it to lowercase for comparison
         char storedKey[MAX_CHAR_LEN];
@@ -166,35 +228,88 @@ int query(int numRecords, char *key, int isHash)
     return 1; // Record not found
 }
 
+/**
+ * Updates the value of a record based on the key.
+ *
+ * @param key The key of the record to update.
+ * @param newValue The new value for the record.
+ * @param isHash Flag indicating whether to use a hash table for data storage.
+ * @return 0 on success, 1 on failure.
+ */
 int update(char *key, char *newValue, int isHash)
 {
     if (isHash)
         return updateRecord(key, newValue);
 
+    // Iterate through the records in the table to find a matching key
     for (int i = 0; i < MAX_TABLE_SIZE; i++)
     {
         if (strcmp(table[i]->name, key) == 0)
         {
-            snprintf(table[i]->number, sizeof(table[i]->number), "%s", newValue); // Update the value for the specific key
+            // Update the value for the specific key
+            snprintf(table[i]->number, sizeof(table[i]->number), "%s", newValue);
             printf("The value for the record of Key=%s is successfully updated.\n", key);
             return 0;
         }
     }
+
+    // If the key is not found, print an error message
     printf("Key=%s not found. Failed to update the value.\n", key);
     return 1;
 }
 
-int del(char *key, int isHash)
+/**
+ * Deletes a record based on the key.
+ *
+ * @param numRecords Pointer to the number of records.
+ * @param KeyToDelete The key of the record to delete.
+ * @param isHash Flag indicating whether to use a hash table for data storage.
+ * @return 0 on success, 1 on failure.
+ */
+int del(int *numRecords, char *KeyToDelete, int isHash)
 {
     if (isHash)
-        return delRecord(key);
-    return 0;
+        return delRecord(KeyToDelete);
+
+    // Check if the key is found in the records
+    int found = 0;
+    for (int i = 0; i < *numRecords; i++)
+    {
+        if (strcmp(table[i]->name, KeyToDelete) == 0)
+        {
+            // Key found, delete the record
+            found = 1;
+            for (int j = i; j < *numRecords - 1; j++)
+            {
+                table[j] = table[j + 1];
+            }
+            (*numRecords)--; // Decrement the number of records
+            printf("The record of Key='%s' is successfully deleted.\n", KeyToDelete);
+            return 0;
+        }
+    }
+
+    // If the key is not found, print a message
+    if (!found)
+    {
+        printf("There is no record with Key='%s' found in the database.\n", KeyToDelete);
+    }
+
+    // Return failure
+    return 1;
 }
 
+/**
+ * Displays all records.
+ *
+ * @param isHash Flag indicating whether to use a hash table for data storage.
+ * @return 0 on success, -1 on failure.
+ */
 int showAll(int isHash)
 {
     if (isHash)
         return printRecords();
 
+    // Linear search implementation (not implemented)
     return 0;
 }
