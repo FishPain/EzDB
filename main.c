@@ -89,16 +89,12 @@ int main(int argc, char *argv[])
 
             int result = query(numRecords, key, isHash);
 
-            if (result == 0)
-            {
-                // Query was successful
-                printf("Query executed successfully.\n");
-            }
-            else
+            if (result != 0)
             {
                 // Query failed
                 printf("Query failed. The key '%s' was not found in the database.\n", key);
             }
+            continue;
         }
 
         else if (strcmp(operation, INSERT) == 0)
