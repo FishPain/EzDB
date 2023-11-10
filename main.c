@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            int result = del(numRecords, key, isHash);
+            int result = del(&numRecords, key, isHash);
 
             if (result != 0)
             {

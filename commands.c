@@ -187,7 +187,7 @@ int insert(char *key, char *value, int isHash)
  * @param isHash Flag indicating whether to use a hash table for data storage.
  * @return 0 if the record is found, 1 if not found.
  */
-int query(char *key, int isHash)
+int query(int numRecords, char *key, int isHash)
 {
     if (isHash)
         return getRecord(key);
@@ -201,7 +201,7 @@ int query(char *key, int isHash)
     }
 
     // Iterate through the records in the table to find a matching key
-    for (int i = 0; i < MAX_TABLE_SIZE; i++)
+    for (int i = 0; i < numRecords; i++)
     {
         // Get the stored key and convert it to lowercase for comparison
         char storedKey[MAX_CHAR_LEN];
