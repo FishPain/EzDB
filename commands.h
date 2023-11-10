@@ -5,6 +5,7 @@
 #define OPEN "open"
 #define SAVE "save"
 #define SHOW_ALL "show_all"
+#define INSERT "insert"
 #define UPDATE "update"
 #define QUERY "query"
 #define DELETE "delete"
@@ -15,7 +16,7 @@
 
 int open(char *key, int isHash);
 int save(char *key, int isHash);
-int insert(char *key, char *value, int isHash);
+int insert(int *numRecords, char *key, char *value, int isHash);
 int query(int numRecords, char *key, int isHash);
 int update(char *key, char *newValue, int isHash);
 int del(int *numRecords, char *KeyToDelete, int isHash);

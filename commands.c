@@ -156,7 +156,7 @@ int save(char *key, int isHash)
  * @param isHash Flag indicating whether to use a hash table for data storage.
  * @return 0 on success, -1 on failure.
  */
-int insert(char *key, char *value, int isHash)
+int insert(int *numRecords, char *key, char *value, int isHash)
 {
     // Allocate memory for a new phonebook record
     phonebook *record = malloc(sizeof(phonebook));
@@ -175,7 +175,26 @@ int insert(char *key, char *value, int isHash)
         snprintf(record->number, sizeof(record->number), "%s", value);
         insertRecord(record);
     }
-
+    else
+    {
+        // Iterate through the records in the table to find a matching key
+        for (int i = 0; i < MAX_TABLE_SIZE; i++)
+        {
+            if (table[i] == NULL)
+            {
+                snprintf(record->name, sizeof(record->name), "%s", key);
+                snprintf(record->number, sizeof(record->number), "%s", value);
+                table[i] = record;
+                (*numRecords)++;    
+                printf("The value for the record of Key=%s is successfully updated.\n", key);
+                break;
+            }
+            if (strcmp(table[i]->name, key) == 0)
+            {
+                return 1;
+            }
+        }
+    }
     // Return success
     return 0;
 }
@@ -199,6 +218,7 @@ int query(int numRecords, char *key, int isHash)
     {
         lowerKey[i] = tolower(lowerKey[i]);
     }
+    printf("%d", numRecords);
 
     // Iterate through the records in the table to find a matching key
     for (int i = 0; i < numRecords; i++)
