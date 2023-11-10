@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            int numRecords = open(key, isHash); // calling the function and storing the number of records
+            numRecords = open(key, isHash); // calling the function and storing the number of records
 
             if (numRecords == -1) // check if the function failed to open the file.
             {
@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            int result = insert(key, value, isHash);
+            int result = insert(&numRecords, key, value, isHash);
 
             if (result != 0)
             {

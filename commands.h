@@ -15,7 +15,7 @@
 
 int open(char *key, int isHash);
 int save(char *key, int isHash);
-int insert(char *key, char *value, int isHash);
+int insert(int *numRecords, char *key, char *value, int isHash);
 int query(int numRecords, char *key, int isHash);
 int update(char *key, char *newValue, int isHash);
 int del(int *numRecords, char *KeyToDelete, int isHash);
