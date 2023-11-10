@@ -218,7 +218,6 @@ int query(int numRecords, char *key, int isHash)
     {
         lowerKey[i] = tolower(lowerKey[i]);
     }
-    printf("%d", numRecords);
 
     // Iterate through the records in the table to find a matching key
     for (int i = 0; i < numRecords; i++)
