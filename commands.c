@@ -292,13 +292,11 @@ int del(int *numRecords, char *KeyToDelete, int isHash)
         return delRecord(KeyToDelete);
 
     // Check if the key is found in the records
-    int found = 0;
     for (int i = 0; i < *numRecords; i++)
     {
         if (strcmp(table[i]->name, KeyToDelete) == 0)
         {
             // Key found, delete the record
-            found = 1;
             for (int j = i; j < *numRecords - 1; j++)
             {
                 table[j] = table[j + 1];
@@ -308,13 +306,7 @@ int del(int *numRecords, char *KeyToDelete, int isHash)
             return 0;
         }
     }
-
-    // If the key is not found, print a message
-    if (!found)
-    {
-        printf("There is no record with Key='%s' found in the database.\n", KeyToDelete);
-    }
-
+    printf("There is no record with Key='%s' found in the database.\n", KeyToDelete);
     // Return failure
     return 1;
 }
