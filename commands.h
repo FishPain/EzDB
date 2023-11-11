@@ -4,7 +4,8 @@
 #define MAX_TABLE_SIZE 10
 #define OPEN "open"
 #define SAVE "save"
-#define SHOW_ALL "show_all"
+#define SHOW "show"
+#define ALL "all"
 #define INSERT "insert"
 #define UPDATE "update"
 #define QUERY "query"

@@ -72,15 +72,14 @@ int insertRecord(phonebook *record)
         // If there are elements in the list, traverse to the end
         while (head->next != NULL)
         {
-            // Abort insert if the record already exists in the list
+            head = head->next;
             if (strcmp(head->name, record->name) == 0)
             {
                 printf("The record with Key=%s already exists in the database.\n", record->name);
                 return 1;
             }
-            head = head->next;
         }
-
+        
         // Add the new record to the end of the list
         head->next = record;
     }
@@ -228,14 +227,28 @@ int printRecords()
         // Iterate through the linked list at the current index
         while (head != NULL)
         {
-            // Print the information of each record in the linked list
-            printf("%s %s\n", head->name, head->number);
             counter++;
             // Move to the next node in the linked list
             head = head->next;
         }
     }
 
-    printf("There are in total %d records found.", counter);
+    printf("There are in total %d records found:\n", counter);
+
+    // Iterate through each index in the hash table
+    for (int i = 0; i < MAX_TABLE_SIZE; i++)
+    {
+        // Get the pointer to the head of the linked list at the current index
+        phonebook *head = table[i];
+        
+        // Iterate through the linked list at the current index
+        while (head != NULL)
+        {
+            // Print the information of each record in the linked list
+            printf("%s %s\n", head->name, head->number);
+            // Move to the next node in the linked list
+            head = head->next;
+        }
+    }
     return 0;
 }
