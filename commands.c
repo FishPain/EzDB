@@ -168,31 +168,29 @@ int insert(int *numRecords, char *key, char *value, int isHash)
         return -1;
     }
 
-    // Populate the record fields
+    snprintf(record->name, sizeof(record->name), "%s", key);
+    snprintf(record->number, sizeof(record->number), "%s", value);
+
+    // hash table implementation of insert
     if (isHash)
+        return insertRecord(record);
+
+    // Iterate through the records in the table to find a matching key
+    for (int i = 0; i < MAX_TABLE_SIZE; i++)
     {
-        snprintf(record->name, sizeof(record->name), "%s", key);
-        snprintf(record->number, sizeof(record->number), "%s", value);
-        insertRecord(record);
-    }
-    else
-    {
-        // Iterate through the records in the table to find a matching key
-        for (int i = 0; i < MAX_TABLE_SIZE; i++)
+        // Insert the record into the first available slot
+        if (table[i] == NULL)
         {
-            if (table[i] == NULL)
-            {
-                snprintf(record->name, sizeof(record->name), "%s", key);
-                snprintf(record->number, sizeof(record->number), "%s", value);
-                table[i] = record;
-                (*numRecords)++;    
-                printf("The value for the record of Key=%s is successfully updated.\n", key);
-                break;
-            }
-            if (strcmp(table[i]->name, key) == 0)
-            {
-                return 1;
-            }
+            table[i] = record;
+            (*numRecords)++; // Increment the number of records
+            printf("The value for the record of Key=%s Value=%s is successfully inserted.\n", key, value);
+            return 0;
+        }
+
+        // If the key already exists, abort insert
+        if (strcmp(table[i]->name, key) == 0)
+        {
+            return 1;
         }
     }
     // Return success
@@ -273,7 +271,7 @@ int update(char *key, char *newValue, int isHash)
     }
 
     // If the key is not found, print an error message
-    printf("Key=%s not found. Failed to update the value.\n", key);
+    printf("There is no record with Key=%s found in the database.\n", key);
     return 1;
 }
 
@@ -301,11 +299,11 @@ int del(int *numRecords, char *KeyToDelete, int isHash)
                 table[j] = table[j + 1];
             }
             (*numRecords)--; // Decrement the number of records
-            printf("The record of Key='%s' is successfully deleted.\n", KeyToDelete);
+            printf("The record of Key=%s is successfully deleted.\n", KeyToDelete);
             return 0;
         }
     }
-    printf("There is no record with Key='%s' found in the database.\n", KeyToDelete);
+    printf("There is no record with Key=%s found in the database.\n", KeyToDelete);
     // Return failure
     return 1;
 }
