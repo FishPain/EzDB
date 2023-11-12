@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
             }
         }
 
-        else if (strcmp(operation, SHOW) == 0 && strcmp(key, ALL) == 0)
+        else if (strcmp(operation, SHOW) == 0 && strcmp(lower(key), ALL) == 0)
         {
             int result = showAll(table);
             if (result == 0)

@@ -10,11 +10,12 @@
  *
  * @param str The string to be converted to lowercase.
  */
-void lower(char *str)
+char *lower(char *str)
 {
     for (int i = 0; str[i]; i++)
         if (str[i] != '_')
             str[i] = tolower((unsigned char)str[i]);
+    return str;
 }
 
 /**
