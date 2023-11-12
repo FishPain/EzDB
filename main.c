@@ -37,12 +37,6 @@ int main(int argc, char *argv[])
             }
 
             numRecords = open(key, isHash); // calling the function and storing the number of records
-
-            if (numRecords == -1) // check if the function failed to open the file.
-            {
-                printf("Failed to open the file. %d\n", numRecords);
-                continue;
-            }
         }
 
         else if (strcmp(operation, SAVE) == 0)
@@ -53,13 +47,7 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            int result = save(key, isHash);
-
-            if (result != 0)
-            {
-                printf("Failed to save the file. %d\n", result);
-                continue;
-            }
+            save(key, isHash);
         }
 
         else if (strcmp(operation, UPDATE) == 0)
@@ -70,13 +58,7 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            int result = update(key, value, isHash);
-
-            if (result != 0)
-            {
-                printf("Failed to update the key. %d\n", result);
-                continue;
-            }
+            update(key, value, isHash);
         }
 
         else if (strcmp(operation, QUERY) == 0)
@@ -87,14 +69,7 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            int result = query(numRecords, key, isHash);
-
-            if (result != 0)
-            {
-                // Query failed
-                printf("Query failed. The key '%s' was not found in the database.\n", key);
-            }
-            continue;
+            query(numRecords, key, isHash);
         }
 
         else if (strcmp(operation, INSERT) == 0)
@@ -105,13 +80,7 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            int result = insert(&numRecords, key, value, isHash);
-
-            if (result != 0)
-            {
-                printf("Failed to insert record %d\n", result);
-                continue;
-            }
+            insert(&numRecords, key, value, isHash);
         }
 
         else if (strcmp(operation, DELETE) == 0)
@@ -122,18 +91,12 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            int result = del(&numRecords, key, isHash);
-
-            if (result != 0)
-            {
-                printf("Failed to delete record %d\n", result);
-                continue;
-            }
+            del(&numRecords, key, isHash);
         }
 
         else if (strcmp(operation, SHOW) == 0 && strcmp(key, ALL) == 0)
         {
-            int result = showAll(table);
+            int result = showAll(isHash);
             if (result == 0)
             {
                 // Query was successful
@@ -144,7 +107,6 @@ int main(int argc, char *argv[])
                 // Query failed
                 printf("SHOW ALL failed. Records could not be found.\n");
             }
-        }
 
         else if (strcmp(operation, EXIT) == 0)
         {
