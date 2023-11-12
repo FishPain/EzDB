@@ -135,8 +135,8 @@ int del(void)
 
 int showAll(struct kvPair *data)
 {
-    printf("There are in total %i records found:\n", tablesize);  
-    for (int i = 0; i < tablesize; i++) 
+    printf("There are in total %i records found:\n", sizeof(data));  
+    for (int i = 0; i < sizeof(data); i++) 
     {
         if (data[i].value == 0) 
         {

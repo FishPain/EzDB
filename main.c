@@ -82,6 +82,21 @@ int main()
             }
         }
 
+        else if (strcmp(operation, SHOW_ALL) == 0)
+        {
+            int result = showAll(table);
+            if (result == 0)
+            {
+                // Query was successful
+                printf("SHOW ALL executed successfully.\n");
+            }
+            else
+            {
+                // Query failed
+                printf("SHOW ALL failed. Records could not be found.\n");
+            }
+        }
+
         else if (strcmp(operation, EXIT) == 0)
         {
             break;
