@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
                 // Query failed
                 printf("SHOW ALL failed. Records could not be found.\n");
             }
-
+        }
         else if (strcmp(operation, EXIT) == 0)
         {
             break;
