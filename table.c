@@ -245,7 +245,7 @@ int printRecords()
         while (head != NULL)
         {
             // Print the information of each record in the linked list
-            printf("%s %s\n", head->name, head->number);
+            printf("%-10s %-10s\n", head->name, head->number);
             // Move to the next node in the linked list
             head = head->next;
         }
