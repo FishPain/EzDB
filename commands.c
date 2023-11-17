@@ -318,15 +318,12 @@ int showAll(int isHash)
 {
     if (isHash)
         return printRecords();
-
+    
     printf("There are in total %i records found:\n", sizeof(table));  
+
     for (int i = 0; i < sizeof(table); i++)
     {
-        if (table[i]->number == 0)
-        {
-            printf("\n");
-        }
-        else 
+        if (table[i]!=NULL)
         {
             printf("%s %s\n", table[i]->name, table[i]->number);
         }

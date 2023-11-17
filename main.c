@@ -97,16 +97,6 @@ int main(int argc, char *argv[])
         else if (strcmp(operation, SHOW) == 0 && strcmp(lower(key), ALL) == 0)
         {
             int result = showAll(isHash);
-            if (result == 0)
-            {
-                // Query was successful
-                printf("SHOW ALL executed successfully.\n");
-            }
-            else
-            {
-                // Query failed
-                printf("SHOW ALL failed. Records could not be found.\n");
-            }
         }
         else if (strcmp(operation, EXIT) == 0)
         {
