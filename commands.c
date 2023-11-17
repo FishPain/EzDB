@@ -136,7 +136,7 @@ int save(char *key, int isHash)
         while (head != NULL)
         {
             fprintf(phonebookPtr, "%s %s\n", head->name, head->number);
-            printf("Saved---%s-%s---\n", head->name, head->number);
+            printf("Saved: %-10s %-10s\n", head->name, head->number);
             head = head->next;
         }
     }
