@@ -87,3 +87,27 @@ int getFlag(int argc, char *argv[])
         return 1;
     return 0;
 }
+
+/**
+ * Validates an 8-digit phone number represented as a string and starts with 6, 8, or 9.
+ *
+ * @param phoneNumber A string representing the phone number to be validated.
+ * @return 1 if the phoneNumber is a valid 8-digit number starting with 6, 8, or 9, otherwise 0.
+ */
+int isValidPhoneNumber(const char *phoneNumber)
+{
+    // Check if the phone number is exactly 8 digits or if the first digit is 6, 8, or 9
+    if (
+        (strlen(phoneNumber) != 8) ||
+        (phoneNumber[0] != '6' && phoneNumber[0] != '8' && phoneNumber[0] != '9'))
+        return 0;
+
+    // Check if all characters in the phone number are digits
+    for (int i = 0; i < 8; ++i)
+    {
+        if (!isdigit(phoneNumber[i]))
+            return 0;
+    }
+
+    return 1;
+}

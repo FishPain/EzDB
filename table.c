@@ -42,9 +42,6 @@ int initTable()
         table[i] = NULL;
     }
 
-    // Print a message indicating that the table has been created
-    printf("---Table Created---\n");
-
     // Return 0 to indicate successful initialization
     return 0;
 }
@@ -79,7 +76,7 @@ int insertRecord(phonebook *record)
                 return 1;
             }
         }
-        
+
         // Add the new record to the end of the list
         head->next = record;
     }
@@ -240,7 +237,7 @@ int printRecords()
     {
         // Get the pointer to the head of the linked list at the current index
         phonebook *head = table[i];
-        
+
         // Iterate through the linked list at the current index
         while (head != NULL)
         {

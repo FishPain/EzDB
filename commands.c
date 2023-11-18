@@ -190,6 +190,7 @@ int insert(int *numRecords, char *key, char *value, int isHash)
         // If the key already exists, abort insert
         if (strcmp(table[i]->name, key) == 0)
         {
+            printf("The record with Key=%s already exists in the database.\n", key);
             return 1;
         }
     }

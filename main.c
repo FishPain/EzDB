@@ -58,7 +58,14 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            update(key, value, isHash);
+            else if (!isValidPhoneNumber(value))
+            {
+                printf("Invalid phone number. Expecting: 8-digit number starting with 6, 8, or 9\n");
+                continue;
+            }
+
+            else
+                update(key, value, isHash);
         }
 
         else if (strcmp(operation, QUERY) == 0)
@@ -80,7 +87,14 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            insert(&numRecords, key, value, isHash);
+            else if (!isValidPhoneNumber(value))
+            {
+                printf("Invalid phone number. Expecting: 8-digit number starting with 6, 8, or 9\n");
+                continue;
+            }
+
+            else
+                insert(&numRecords, key, value, isHash);
         }
 
         else if (strcmp(operation, DELETE) == 0)
