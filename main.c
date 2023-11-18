@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            save(key, isHash);
+            save(key, numRecords, isHash);
         }
 
         else if (strcmp(operation, UPDATE) == 0)
@@ -96,9 +96,8 @@ int main(int argc, char *argv[])
 
         else if (strcmp(operation, SHOW) == 0 && strcmp(lower(key), ALL) == 0)
         {
-            showAll(isHash);
+            int result = showAll(numRecords, isHash);
         }
-
         else if (strcmp(operation, EXIT) == 0)
         {
             break;
