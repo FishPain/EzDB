@@ -91,14 +91,14 @@ int open(char *key, int isHash)
  * @param isHash Flag indicating whether to use a hash table for data storage.
  * @return 0 on success, -1 on failure.
  */
-int save(char *key, int isHash)
+int save(char *key, int numRecords, int isHash)
 {
     FILE *phonebookPtr;
     char filePath[MAX_CHAR_LEN];
 
     // Check if there is data to save
     int isEmpty = 1;
-    for (int i = 0; i < MAX_TABLE_SIZE; i++)
+    for (int i = 0; i < numRecords; i++)
     {
         if (table[i] != NULL)
         {
@@ -130,7 +130,7 @@ int save(char *key, int isHash)
     fprintf(phonebookPtr, "%s\n", FILE_HEADER);
 
     // Write data to the file
-    for (int i = 0; i < MAX_TABLE_SIZE; i++)
+    for (int i = 0; i < numRecords; i++)
     {
         phonebook *head = table[i];
         while (head != NULL)
@@ -314,21 +314,20 @@ int del(int *numRecords, char *KeyToDelete, int isHash)
  * @param isHash Flag indicating whether to use a hash table for data storage.
  * @return 0 on success, -1 on failure.
  */
-int showAll(int isHash)
+int showAll(int numRecords, int isHash)
 {
     if (isHash)
         return printRecords();
-    
-    printf("There are in total %i records found:\n", sizeof(table));  
 
-    for (int i = 0; i < sizeof(table); i++)
+    printf("There are in total %d records found:\n", numRecords);
+
+    for (int i = 0; i < numRecords; i++)
     {
-        if (table[i]!=NULL)
+        if (table[i] != NULL)
         {
-            printf("%s %s\n", table[i]->name, table[i]->number);
+            printf("%-10s %-10s\n", table[i]->name, table[i]->number);
         }
     }
 
-    // Linear search implementation (not implemented)
     return 0;
 }

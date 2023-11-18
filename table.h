@@ -1,6 +1,6 @@
 #ifndef TABLE_H
 #define TABLE_H
-#define MAX_TABLE_SIZE 10
+#define MAX_TABLE_SIZE 50
 #define MAX_CHAR_LEN 256
 
 typedef struct phonebook
