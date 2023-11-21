@@ -27,8 +27,8 @@ char *lower(char *str)
  */
 int compare(const void *tmp1, const void *tmp2)
 {
-    phonebook *data1 = (phonebook *)tmp1;
-    phonebook *data2 = (phonebook *)tmp2;
+    phonebook *data1 = *(phonebook **)tmp1;
+    phonebook *data2 = *(phonebook **)tmp2;
 
     // Check if key (contact name) is the same
     int chCompare = strcmp(data1->name, data2->name);

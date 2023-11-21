@@ -72,7 +72,8 @@ int open(char *key, int isHash)
     }
 
     // Sort the data using qsort (commented out)
-    // qsort(table, c, sizeof(phonebook), compare);
+    if (!isHash)
+        qsort(table, c, sizeof(phonebook *), compare);
 
     // Print the loaded records
     printRecords();
@@ -323,6 +324,10 @@ int showAll(int numRecords, int isHash)
         return printRecords();
 
     printf("There are in total %d records found:\n", numRecords);
+
+    // Sort the data using qsort (commented out)
+    if (!isHash)
+        qsort(table, numRecords, sizeof(phonebook *), compare);
 
     for (int i = 0; i < numRecords; i++)
     {
