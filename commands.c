@@ -96,6 +96,8 @@ int save(char *key, int numRecords, int isHash)
     FILE *phonebookPtr;
     char filePath[MAX_CHAR_LEN];
 
+    numRecords = isHash ? MAX_TABLE_SIZE : numRecords;
+
     // Check if there is data to save
     int isEmpty = 1;
     for (int i = 0; i < numRecords; i++)
@@ -109,7 +111,7 @@ int save(char *key, int numRecords, int isHash)
 
     if (isEmpty)
     {
-        printf("No data to save.\n");
+        printf("No data to save. Have you opened the file?\n");
         return -1;
     }
 

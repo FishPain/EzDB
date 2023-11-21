@@ -1,7 +1,6 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H
 
-#define MAX_TABLE_SIZE 10
 #define OPEN "open"
 #define SAVE "save"
 #define SHOW "show"
