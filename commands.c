@@ -326,8 +326,7 @@ int showAll(int numRecords, int isHash)
     printf("There are in total %d records found:\n", numRecords);
 
     // Sort the data using qsort (commented out)
-    if (!isHash)
-        qsort(table, numRecords, sizeof(phonebook *), compare);
+    qsort(table, numRecords, sizeof(phonebook *), compare);
 
     for (int i = 0; i < numRecords; i++)
     {
