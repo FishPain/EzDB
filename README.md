@@ -8,6 +8,10 @@
 
 - To compile using GCC, run `make` then `./ezdb` in terminal.
 > For windows environment, it is adviced to run program in github codespace [here](https://github.com/codespaces)
+
+- Run Test
+> Auto testing is done through `test/test.c`
+
 ---
 
 # Hashtable Implementation Overview
