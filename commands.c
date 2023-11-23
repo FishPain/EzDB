@@ -24,6 +24,12 @@ int open(char *key, int isHash)
     // Construct the file path
     snprintf(filePath, sizeof(filePath), "data/%s", key);
 
+    if(access(filePath, F_OK) == -1)
+    {
+        printf("File does not exist. Cannot save data.\n");
+        return -1;
+    }
+
     // Open the file for reading
     phonebookPtr = fopen(filePath, "r");
 
@@ -272,7 +278,7 @@ int update(char *key, char *newValue, int isHash)
     // Iterate through the records in the table to find a matching key
     for (int i = 0; i < MAX_TABLE_SIZE; i++)
     {
-        if (strcmp(table[i]->name, key) == 0)
+        if (table[i] != NULL && strcmp(table[i]->name, key) == 0)
         {
             // Update the value for the specific key
             snprintf(table[i]->number, sizeof(table[i]->number), "%s", newValue);

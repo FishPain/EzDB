@@ -67,14 +67,18 @@ int insertRecord(phonebook *record)
     else
     {
         // If there are elements in the list, traverse to the end
-        while (head->next != NULL)
+        while (head != NULL)
         {
-            head = head->next;
             if (strcmp(head->name, record->name) == 0)
             {
                 printf("The record with Key=%s already exists in the database.\n", record->name);
                 return 1;
             }
+
+            if (head->next == NULL)
+                break;
+
+            head = head->next;
         }
 
         // Add the new record to the end of the list
@@ -110,13 +114,11 @@ int updateRecord(char *name, char *number)
             strcpy(head->number, number);
 
             // Print a message indicating that the record has been updated
-            printf("“The value for the record of Key=%s is successfully updated.\n", head->name);
+            printf("The value for the record of Key=%s is successfully updated.\n", head->name);
             return 0;
         }
-        else
-        {
-            head = head->next;
-        }
+        
+        head = head->next;
     }
 
     // If no matching record is found, print a message and return an error code

@@ -16,101 +16,109 @@ Team members:
 7. YU HAOTONG
 Date: 23 NOV 2023
 
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 No data to save. Have you opened the file?
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 Missing Filename. Expecting: OPEN <FILE_NAME>
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 File does not exist. Cannot save data.
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 Failed to read the header.
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
+A new record of Key=alice, Value=68971234 is successfully inserted.
+A new record of Key=bob, Value=97654321 is successfully inserted.
+A new record of Key=clara, Value=81234567 is successfully inserted.
+A new record of Key=david, Value=65981234 is successfully inserted.
+A new record of Key=emily, Value=89763412 is successfully inserted.
+A new record of Key=frank, Value=92817654 is successfully inserted.
+A new record of Key=grace, Value=76543219 is successfully inserted.
+A new record of Key=henry, Value=64982371 is successfully inserted.
 There are in total 8 records found:
-alice      68971234  
-bob        97654321  
 clara      81234567  
-david      65981234  
-emily      89763412  
 frank      92817654  
 grace      76543219  
+emily      89763412  
 henry      64982371  
-Enter Your Choice (Linear Search):
+alice      68971234  
+bob        97654321  
+david      65981234  
+Enter Your Choice (Hashtable):
 Invalid number of arguments for INSERT. Expecting: INSERT <KEY> <VALUE>
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 Invalid number of arguments for INSERT. Expecting: INSERT <KEY> <VALUE>
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 The record with Key=alice already exists in the database.
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 Invalid phone number. Expecting: 8-digit number starting with 6, 8, or 9
-Enter Your Choice (Linear Search):
-The value for the record of Key=bryan Value=88888888 is successfully inserted.
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
+A new record of Key=bryan, Value=88888888 is successfully inserted.
+Enter Your Choice (Hashtable):
 There are in total 9 records found:
+clara      81234567  
+frank      92817654  
+grace      76543219  
+emily      89763412  
+henry      64982371  
 alice      68971234  
 bob        97654321  
+david      65981234  
 bryan      88888888  
-clara      81234567  
-david      65981234  
-emily      89763412  
-frank      92817654  
-grace      76543219  
-henry      64982371  
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 Invalid number of arguments for Query. Expecting: QUERY <KEY>
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 There is no record with Key=NameNonExist found in the database.
-Enter Your Choice (Linear Search):
-A record of Key=bryan, Value=88888888 is found in the database.
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
+A record of Key=bryan, Value=88888888 is found in the database
+Enter Your Choice (Hashtable):
 Invalid number of arguments for UPDATE. Expecting: UPDATE <KEY> <NEW_VALUE>
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 Invalid number of arguments for UPDATE. Expecting: UPDATE <KEY> <NEW_VALUE>
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 Invalid phone number. Expecting: 8-digit number starting with 6, 8, or 9
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 There is no record with Key=NameNonExist found in the database.
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 The value for the record of Key=bryan is successfully updated.
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 There are in total 9 records found:
+clara      81234567  
+frank      92817654  
+grace      76543219  
+emily      89763412  
+henry      64982371  
 alice      68971234  
 bob        97654321  
+david      65981234  
 bryan      99999999  
+Enter Your Choice (Hashtable):
+Invalid number of arguments for DELETE. Expecting: DELETE <KEY>
+Enter Your Choice (Hashtable):
+There is no record with Key=NameNonExist found in the database.
+Enter Your Choice (Hashtable):
+The record of Key=bryan is successfully deleted.
+Enter Your Choice (Hashtable):
+There is no record with Key=bryan found in the database.
+Enter Your Choice (Hashtable):
+There are in total 8 records found:
 clara      81234567  
-david      65981234  
-emily      89763412  
 frank      92817654  
 grace      76543219  
+emily      89763412  
 henry      64982371  
-Enter Your Choice (Linear Search):
-Invalid number of arguments for DELETE. Expecting: DELETE <KEY>
-Enter Your Choice (Linear Search):
-There is no record with Key=NameNonExist found in the database.
-Enter Your Choice (Linear Search):
-The record of Key=bryan is successfully deleted.
-Enter Your Choice (Linear Search):
-There is no record with Key=bryan found in the database.
-Enter Your Choice (Linear Search):
-There are in total 8 records found:
 alice      68971234  
 bob        97654321  
-clara      81234567  
 david      65981234  
-emily      89763412  
-frank      92817654  
-grace      76543219  
-henry      64982371  
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 Missing Filename. Expecting: SAVE <FILE_NAME>
-Enter Your Choice (Linear Search):
+Enter Your Choice (Hashtable):
 File does not exist. Cannot save data.
-Enter Your Choice (Linear Search):
-Saved: alice      68971234  
-Saved: bob        97654321  
+Enter Your Choice (Hashtable):
 Saved: clara      81234567  
-Saved: david      65981234  
-Saved: emily      89763412  
 Saved: frank      92817654  
 Saved: grace      76543219  
+Saved: emily      89763412  
 Saved: henry      64982371  
-Enter Your Choice (Linear Search):
+Saved: alice      68971234  
+Saved: bob        97654321  
+Saved: david      65981234  
+Enter Your Choice (Hashtable):
