@@ -10,6 +10,8 @@
 > For windows environment, it is adviced to run program in github codespace [here](https://github.com/codespaces)
 
 - Run Test
+> Run `./run_test.sh`<br>
+> It will test both linear and hashtable features<br>
 > Auto testing is done through `test/test.c`
 
 ---
