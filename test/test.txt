@@ -1,0 +1,29 @@
+SAVE TestData.txt
+OPEN
+OPEN FileNonExist.txt
+OPEN InvalidFile.txt
+OPEN TestData.txt
+INSERT
+INSERT alice
+INSERT alice 88888888
+INSERT bryan 123456789
+INSERT bryan 88888888
+SHOW ALL
+QUERY
+QUERY NameNonExist
+QUERY bryan
+UPDATE
+UPDATE NameNonExist
+UPDATE bryan
+UPDATE bryan 123456789
+UPDATE bryan 99999999
+SHOW ALL
+DELETE
+DELETE NameNonExist
+DELETE bryan
+DELETE bryan
+SHOW ALL
+SAVE
+SAVE FileNonExist.txt
+SAVE TestData.txt
+EXIT

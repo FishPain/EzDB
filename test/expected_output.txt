@@ -1,0 +1,116 @@
+Declaration
+SIT’s policy on copying does not allow the students to copy source code as well as assessment solutions from another person or other places. It is the students’ responsibility to guarantee that their assessment solutions are their own work. Meanwhile, the students must also ensure that their work is not accessible by others. Where such plagiarism is detected, both of the assessments involved will receive ZERO mark.
+We hereby declare that:
+• We fully understand and agree to the abovementioned plagiarism policy.
+• We did not copy any code from others or from other places.
+• We did not share our codes with others or upload to any other places for public access.
+• We agree that our project will receive Zero mark if there is any plagiarism detected.
+Declared by: Group Name: (please insert your group name)
+Team members:
+1. ABDUL HALIQ BIN ABDUL RAHIM
+2. BRYAN CHAN ZI JIE
+3. ASHSYAHID BIN HUSSIN
+4. LEENA SOO WEI QI
+5. WONG KHIN FOONG
+6. HONG ZIYANG
+7. YU HAOTONG
+Date: 23 NOV 2023
+
+Enter Your Choice (Linear Search):
+No data to save. Have you opened the file?
+Enter Your Choice (Linear Search):
+Missing Filename. Expecting: OPEN <FILE_NAME>
+Enter Your Choice (Linear Search):
+Error opening file.
+Enter Your Choice (Linear Search):
+Failed to read the header.
+Enter Your Choice (Linear Search):
+There are in total 8 records found:
+alice      68971234  
+bob        97654321  
+clara      81234567  
+david      65981234  
+emily      89763412  
+frank      92817654  
+grace      76543219  
+henry      64982371  
+Enter Your Choice (Linear Search):
+Invalid number of arguments for INSERT. Expecting: INSERT <KEY> <VALUE>
+Enter Your Choice (Linear Search):
+Invalid number of arguments for INSERT. Expecting: INSERT <KEY> <VALUE>
+Enter Your Choice (Linear Search):
+The record with Key=alice already exists in the database.
+Enter Your Choice (Linear Search):
+Invalid phone number. Expecting: 8-digit number starting with 6, 8, or 9
+Enter Your Choice (Linear Search):
+The value for the record of Key=bryan Value=88888888 is successfully inserted.
+Enter Your Choice (Linear Search):
+There are in total 9 records found:
+alice      68971234  
+bob        97654321  
+bryan      88888888  
+clara      81234567  
+david      65981234  
+emily      89763412  
+frank      92817654  
+grace      76543219  
+henry      64982371  
+Enter Your Choice (Linear Search):
+Invalid number of arguments for Query. Expecting: QUERY <KEY>
+Enter Your Choice (Linear Search):
+There is no record with Key=NameNonExist found in the database.
+Enter Your Choice (Linear Search):
+A record of Key=bryan, Value=88888888 is found in the database.
+Enter Your Choice (Linear Search):
+Invalid number of arguments for UPDATE. Expecting: UPDATE <KEY> <NEW_VALUE>
+Enter Your Choice (Linear Search):
+Invalid number of arguments for UPDATE. Expecting: UPDATE <KEY> <NEW_VALUE>
+Enter Your Choice (Linear Search):
+Invalid number of arguments for UPDATE. Expecting: UPDATE <KEY> <NEW_VALUE>
+Enter Your Choice (Linear Search):
+Invalid phone number. Expecting: 8-digit number starting with 6, 8, or 9
+Enter Your Choice (Linear Search):
+The value for the record of Key=bryan is successfully updated.
+Enter Your Choice (Linear Search):
+There are in total 9 records found:
+alice      68971234  
+bob        97654321  
+bryan      99999999  
+clara      81234567  
+david      65981234  
+emily      89763412  
+frank      92817654  
+grace      76543219  
+henry      64982371  
+Enter Your Choice (Linear Search):
+Invalid number of arguments for DELETE. Expecting: DELETE <KEY>
+Enter Your Choice (Linear Search):
+There is no record with Key=NameNonExist found in the database.
+Enter Your Choice (Linear Search):
+The record of Key=bryan is successfully deleted.
+Enter Your Choice (Linear Search):
+There is no record with Key=bryan found in the database.
+Enter Your Choice (Linear Search):
+There are in total 8 records found:
+alice      68971234  
+bob        97654321  
+clara      81234567  
+david      65981234  
+emily      89763412  
+frank      92817654  
+grace      76543219  
+henry      64982371  
+Enter Your Choice (Linear Search):
+Missing Filename. Expecting: SAVE <FILE_NAME>
+Enter Your Choice (Linear Search):
+File does not exist. Cannot save data.
+Enter Your Choice (Linear Search):
+Saved: alice      68971234  
+Saved: bob        97654321  
+Saved: clara      81234567  
+Saved: david      65981234  
+Saved: emily      89763412  
+Saved: frank      92817654  
+Saved: grace      76543219  
+Saved: henry      64982371  
+Enter Your Choice (Linear Search):

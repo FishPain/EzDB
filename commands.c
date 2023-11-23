@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 #include "commands.h"
 #include "table.h"
 #include "helper.h"
@@ -29,14 +30,14 @@ int open(char *key, int isHash)
     // Check for file opening errors
     if (phonebookPtr == NULL)
     {
-        perror("Error opening file");
+        printf("Error opening file.\n");
         return -1;
     }
 
     // Read the header line
     if (fgets(text, MAX_CHAR_LEN, phonebookPtr) == NULL)
     {
-        perror("Failed to read the header");
+        printf("Failed to read the header.\n");
         fclose(phonebookPtr);
         return -1;
     }
@@ -50,7 +51,7 @@ int open(char *key, int isHash)
         // Check for memory allocation errors
         if (record == NULL)
         {
-            perror("Memory allocation failed");
+            printf("Memory allocation failed.\n");
             fclose(phonebookPtr);
             return -1;
         }
@@ -119,13 +120,19 @@ int save(char *key, int numRecords, int isHash)
     // Construct the file path
     snprintf(filePath, sizeof(filePath), "data/%s", key);
 
+    if(access(filePath, F_OK) == -1)
+    {
+        printf("File does not exist. Cannot save data.\n");
+        return -1;
+    }
+
     // Open the file for writing
     phonebookPtr = fopen(filePath, "w");
 
     // Check for file opening errors
     if (phonebookPtr == NULL)
     {
-        perror("Error opening file");
+        printf("Error opening file.\n");
         return -1;
     }
 
