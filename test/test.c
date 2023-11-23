@@ -61,7 +61,7 @@ void runTest(int isHash)
 int main()
 {
     int isHash = 0;
-    printf("---RUNNING LINEAR SEARCH---\n");
+    printf("\n---RUNNING LINEAR SEARCH---\n");
     system("./ezdb < test/test.txt > test/test_output.txt");
     printf("Generating test_output.txt\n");
     sleep(2);
@@ -70,13 +70,13 @@ int main()
     printf("---LINEAR SEARCH COMPLETED---\n");
     printf("\n");
     isHash = 1;
-    printf("---RUNNING HASHTABLE---\n");
+    printf("\n---RUNNING HASHTABLE---\n");
     system("./ezdb -h < test/test.txt > test/test_output.txt");
     printf("Generating test_output.txt\n");
     sleep(2);
     printf("test_output.txt generated\n");
     runTest(isHash);
     printf("---HASHTABLE COMPLETED---\n");
-
+    printf("\n");
     return 0;
 }
